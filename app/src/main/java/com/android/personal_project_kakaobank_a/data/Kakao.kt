@@ -2,25 +2,38 @@ package com.android.personal_project_kakaobank_a.data
 
 import com.google.gson.annotations.SerializedName
 
+
 data class Kakao(
-    @SerializedName("display_sitename")
-    val sitename : String,
-    val collection : String,
-    val image_url : String
-)
-
-data class MetaData(
-    @SerializedName("total_count")
-    val totalCount: Int?,
-
-    @SerializedName("is_end")
-    val isEnd: Boolean?
-)
-
-data class ImageSearchResponse(
-    @SerializedName("meta")
-    val metaData: MetaData?,
-
     @SerializedName("documents")
-    var documents: MutableList<Kakao>?
+    val documents: List<Document>,
+    @SerializedName("meta")
+    val meta: Meta
 )
+data class Document(
+    @SerializedName("collection")
+    val collection: String,
+    @SerializedName("thumbnail_url")
+    val thumbnailUrl: String,
+    @SerializedName("image_url")
+    val imageUrl: String,
+    @SerializedName("width")
+    val width: Int,
+    @SerializedName("height")
+    val height: Int,
+    @SerializedName("display_sitename")
+    val displaySitename: String,
+    @SerializedName("doc_url")
+    val docUrl: String,
+    @SerializedName("datetime")
+    val datetime: String,
+)
+
+data class Meta(
+    @SerializedName("is_end")
+    val isEnd: Boolean,
+    @SerializedName("pageable_count")
+    val pageableCount: Int,
+    @SerializedName("total_count")
+    val totalCount: Int
+)
+

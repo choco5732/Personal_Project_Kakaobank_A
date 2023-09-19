@@ -1,6 +1,6 @@
-package com.android.personal_project_kakaobank_a
+package com.android.personal_project_kakaobank_a.retrofit
 
-import com.android.personal_project_kakaobank_a.retrofit.NetWorkInterface
+import com.android.personal_project_kakaobank_a.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,10 +14,10 @@ object NetworkClient {
     private fun createOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
 
-//        if (BuildConfig.DEBUG)
-//            interceptor.level = HttpLoggingInterceptor.Level.BODY
-//        else
-//            interceptor.level = HttpLoggingInterceptor.Level.NONE
+        if (BuildConfig.DEBUG)
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+        else
+            interceptor.level = HttpLoggingInterceptor.Level.NONE
 
         return OkHttpClient.Builder()
             .connectTimeout(20, TimeUnit.SECONDS)
