@@ -88,7 +88,8 @@ class SearchFragment : Fragment() {
     private fun setUpKakaoParameter(query: String): HashMap<String, String> {
 
         return hashMapOf(
-            "query" to query
+            "query" to query,
+            "size" to "80"
         )
     }
 
