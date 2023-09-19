@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.personal_project_kakaobank_a.adapter.ImageAdapter
+import com.android.personal_project_kakaobank_a.adapter.SearchAdapter
 import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBinding
 import com.android.personal_project_kakaobank_a.retrofit.NetworkClient
-import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -21,14 +21,15 @@ class SearchFragment : Fragment() {
     private var _binding: SearchFragmentBinding? = null
     private val binding get() = _binding!!
 
-
-    private val recyclerViewAdpater by lazy {
-        ImageAdapter(test)
-    }
     companion object {
         fun newInstance() = SearchFragment()
-        val test = ArrayList<KakaoData>()
+        val test = arrayListOf<KakaoData>()
     }
+
+    private val recyclerViewAdpater by lazy {
+        SearchAdapter(test)
+        }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +47,16 @@ class SearchFragment : Fragment() {
             val query = binding.etSearchKeyword.text.toString()
             communicateNetWork(setUpKakaoParameter("$query"))
         }
-
+        binding.recyclerView.adapter = recyclerViewAdpater
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        recyclerViewAdpater.itemClick = object : SearchAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                val choicedItem = test[position]
+
+                setFragmentResult("requestKey", bundleOf("item" to choicedItem))
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -75,13 +84,5 @@ class SearchFragment : Fragment() {
 
         Log.d("MainActivity", "#choco5732 List : $test")
 
-        binding.recyclerView.adapter = recyclerViewAdpater
-
-//        val goo = ArrayList<String>()
-//        items.forEach {
-//            Log.d("add Item :", it.stationName)
-//            goo.add(it.stationName)
-//        }
-//        binding.tv1.text = "$items"
     }
 }

@@ -1,19 +1,26 @@
 package com.android.personal_project_kakaobank_a.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.personal_project_kakaobank_a.data.KakaoData
-import com.android.personal_project_kakaobank_a.databinding.ImageItemBinding
+import com.android.personal_project_kakaobank_a.databinding.SearchItemBinding
 import com.bumptech.glide.Glide
 
-class ImageAdapter(
-    val list: MutableList<KakaoData>,
+class SearchAdapter(
+    val list: MutableList<KakaoData>
+) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+interface ItemClick {
+    fun onClick(view: View, position: Int)
+}
 
-) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+var itemClick: ItemClick? = null
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ImageItemBinding.inflate(LayoutInflater.from(parent.context))
+            SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
 
@@ -26,8 +33,8 @@ class ImageAdapter(
         return list.size
     }
 
-    class ViewHolder(
-        private val binding: ImageItemBinding
+    inner class ViewHolder(
+        private val binding: SearchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: KakaoData) = with(binding) {
@@ -38,6 +45,10 @@ class ImageAdapter(
 
             siteName.text = item.displaySiteName
             dateTime.text = item.dateTime
+
+            container.setOnClickListener {
+                itemClick?.onClick(it, adapterPosition)
+            }
 
         }
     }

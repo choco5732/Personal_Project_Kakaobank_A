@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id ("kotlin-parcelize")
+    id ("kotlin-android")
 }
 
 android {
@@ -57,5 +59,6 @@ dependencies {
     implementation ("com.squareup.okhttp3:okhttp:4.10.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-    implementation ("com.github.bumptech.glide:glide:4.13.0")
+    implementation ("com.github.bumptech.glide:glide:4.14.1")
+    implementation ("androidx.fragment:fragment-ktx:1.6.1")
 }
