@@ -25,6 +25,7 @@ class SearchFragment : Fragment() {
         fun newInstance() = SearchFragment()
         val test = arrayListOf<KakaoData>()
     }
+    val testList = arrayListOf<KakaoData>()
 
     private val recyclerViewAdpater by lazy {
         SearchAdapter(test)
@@ -34,7 +35,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = SearchFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,9 +44,10 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSearch.setOnClickListener {
-            test.clear()
             val query = binding.etSearchKeyword.text.toString()
-            communicateNetWork(setUpKakaoParameter("$query"))
+            communicateNetWork(setUpKakaoParameter(query))
+            test.clear()
+            recyclerViewAdpater.notifyDataSetChanged()
         }
         binding.recyclerView.adapter = recyclerViewAdpater
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -53,8 +55,8 @@ class SearchFragment : Fragment() {
         recyclerViewAdpater.itemClick = object : SearchAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
                 val choicedItem = test[position]
-
-                setFragmentResult("requestKey", bundleOf("item" to choicedItem))
+                testList.add(choicedItem)
+                setFragmentResult("requestKey", bundleOf("item" to testList))
             }
         }
     }
@@ -73,8 +75,7 @@ class SearchFragment : Fragment() {
 
     private fun communicateNetWork(param: HashMap<String, String>) = lifecycleScope.launch() {
         val responseData = NetworkClient.kakaoNetWork.getKakao(param = param)
-        Log.e("MainActivity", "#choco5732 받은 데이터 : $responseData")
-//        val items = responseData.documents[0].thumbnailUrl
+        Log.e("SearchFragment", "#choco5732 받은 데이터 : $responseData")
 
         val item = responseData.documents
 
@@ -82,7 +83,6 @@ class SearchFragment : Fragment() {
             test.add(KakaoData(it.thumbnailUrl, it.displaySitename, it.datetime))
         }
 
-        Log.d("MainActivity", "#choco5732 List : $test")
-
+        Log.d("SearchFragment", "#choco5732 testList : $test")
     }
 }

@@ -38,10 +38,11 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val item = bundle.getParcelable<KakaoData>("item")
-            Log.d("LibraryFragment", "#choco5732 LibraryFragment :$item")
+            val itemList = bundle.getParcelableArrayList<KakaoData>("item")
+            Log.d("LibraryFragment", "#choco5732 LibraryFragment :$itemList")
 
-            recyclerViewAdapter.addItem(item)
+            recyclerViewAdapter.addItems(itemList)
+            itemList?.clear()
         }
 
         binding.recyclerView.adapter = recyclerViewAdapter
