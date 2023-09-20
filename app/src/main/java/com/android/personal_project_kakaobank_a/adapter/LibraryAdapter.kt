@@ -12,12 +12,19 @@ class LibraryAdapter(
 ) : RecyclerView.Adapter<LibraryAdapter.ViewHolder>() {
 
     fun addItems(itemList: List<KakaoData>?){
-        if (itemList == null){
+        if (itemList == null) {
             return
         }
 
         list.addAll(itemList)
 //        notifyItemChanged(list.size - 1) 성능향상을 위해 사용할려 했으나.. 검색을 여러번 했을 시 에러가 발생해 주석..
+        notifyDataSetChanged()
+    }
+    fun addItem(item: KakaoData?) {
+        if (item == null) {
+            return
+        }
+        list.add(item)
         notifyDataSetChanged()
     }
 
@@ -35,6 +42,7 @@ class LibraryAdapter(
     override fun getItemCount(): Int {
         return list.size
     }
+
 
     inner class ViewHolder(
         private val binding: LibraryItemBinding
