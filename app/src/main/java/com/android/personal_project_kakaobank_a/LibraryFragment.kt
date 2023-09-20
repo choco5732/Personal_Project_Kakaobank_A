@@ -27,6 +27,8 @@ class LibraryFragment : Fragment() {
         LibraryAdapter(test2)
     }
 
+    private val testSet = mutableSetOf<KakaoData>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,15 +39,20 @@ class LibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initView()
     }
 
     private fun initView() = with(binding) {
         setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val itemList = bundle.getParcelableArrayList<KakaoData>("item")
-            Log.d("LibraryFragment", "#choco5732 LibraryFragment :$itemList")
+            val itemList = bundle.getParcelableArrayList<KakaoData>("item") ?: return@setFragmentResultListener
 
-            recyclerViewAdapter.addItems(itemList)
+            for (i in 0 until itemList.size) {
+                if (itemList[i] !in testSet) {
+                    testSet.add(itemList[i])
+                    recyclerViewAdapter.addItem(itemList[i])
+                }
+            }
             itemList?.clear()
         }
 

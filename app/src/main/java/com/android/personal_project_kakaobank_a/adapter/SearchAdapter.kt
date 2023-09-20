@@ -20,7 +20,7 @@ var itemClick: ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
