@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class KakaoData(
     val thumbnail_url: String,
     val displaySiteName: String,
-    val dateTime: String
+    val dateTime: String,
+    val isAdd: Boolean
 ) : Parcelable

@@ -16,6 +16,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <ImageView
+        android:id="@+id/ic_star"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_check"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/date_time"
+        app:layout_constraintStart_toEndOf="@id/site_name"
+        app:layout_constraintTop_toTopOf="@+id/site_name" />
+
     <TextView
         android:id="@+id/site_name"
         android:layout_width="wrap_content"

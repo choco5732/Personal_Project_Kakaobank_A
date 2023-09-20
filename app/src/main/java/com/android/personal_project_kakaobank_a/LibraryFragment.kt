@@ -21,6 +21,7 @@ class LibraryFragment : Fragment() {
     private val recyclerViewAdapter by lazy{
         LibraryAdapter(test2)
     }
+    private val testSet = mutableSetOf<KakaoData>()
     companion object {
         fun newInstance() = LibraryFragment()
         val test2 = arrayListOf<KakaoData>()
@@ -39,9 +40,19 @@ class LibraryFragment : Fragment() {
 
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val itemList = bundle.getParcelableArrayList<KakaoData>("item")
-            Log.d("LibraryFragment", "#choco5732 LibraryFragment :$itemList")
 
+            Log.d("LibraryFragment", "#choco5732 LibraryFragment :$itemList")
+//            testSet.addAll(itemList!!)
+            Log.d("LibraryFragment", "#choco5732 testSet :$testSet")
+
+//            for( i in 0 until itemList.size) {
+//                if ( itemList[i] in testSet ) {
+//                recyclerViewAdapter.addItems(itemList)
+//                }
+//            }
             recyclerViewAdapter.addItems(itemList)
+
+
             itemList?.clear()
         }
 

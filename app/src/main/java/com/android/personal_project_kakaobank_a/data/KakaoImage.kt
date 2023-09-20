@@ -3,7 +3,7 @@ package com.android.personal_project_kakaobank_a.data
 import com.google.gson.annotations.SerializedName
 
 
-data class Kakao(
+data class KakaoImage(
     @SerializedName("documents")
     val documents: List<Document>,
     @SerializedName("meta")

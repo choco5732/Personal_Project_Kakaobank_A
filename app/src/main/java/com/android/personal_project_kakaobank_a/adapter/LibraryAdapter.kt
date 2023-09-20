@@ -1,11 +1,14 @@
 package com.android.personal_project_kakaobank_a.adapter
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
 import com.bumptech.glide.Glide
+import java.time.format.DateTimeFormatter
 
 class LibraryAdapter(
     val list: MutableList<KakaoData>
@@ -40,15 +43,15 @@ class LibraryAdapter(
         private val binding: LibraryItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bind(item: KakaoData) = with(binding) {
 
             Glide.with(root)
                 .load(item.thumbnail_url)
                 .into(thumbnail)
 
-            siteName.text = item.displaySiteName
             dateTime.text = item.dateTime
-
+            siteName.text = item.displaySiteName
         }
     }
 }
