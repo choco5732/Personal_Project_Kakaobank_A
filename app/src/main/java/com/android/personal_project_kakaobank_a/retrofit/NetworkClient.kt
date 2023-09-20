@@ -10,7 +10,6 @@ object NetworkClient {
 
     private const val KAKAO_BASE_URL = "https://dapi.kakao.com"
 
-
     private fun createOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
 
