@@ -25,6 +25,7 @@ class SearchFragment : Fragment() {
         fun newInstance() = SearchFragment()
         val test = arrayListOf<KakaoData>()
     }
+
     val testList = arrayListOf<KakaoData>()
 
     private val recyclerViewAdpater by lazy {
@@ -67,6 +68,8 @@ class SearchFragment : Fragment() {
 
         recyclerViewAdpater.itemClick = object : SearchAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
+                test[position].isAdd = !test[position].isAdd
+                recyclerViewAdpater.notifyDataSetChanged()
                 val choicedItem = test[position]
                 testList.add(choicedItem)
                 setFragmentResult("requestKey", bundleOf("item" to testList))
@@ -101,7 +104,7 @@ class SearchFragment : Fragment() {
         val item = responseData.documents
 
         item.forEach {
-            test.add(KakaoData(it.thumbnailUrl, it.displaySitename, it.datetime))
+            test.add(KakaoData(it.thumbnailUrl, it.displaySitename, it.datetime, false))
         }
 
         Log.d("SearchFragment", "#choco5732 testList : $test")
