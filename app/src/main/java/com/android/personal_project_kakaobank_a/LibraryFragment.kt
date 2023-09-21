@@ -16,22 +16,21 @@ import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.LibraryFragmentBinding
 import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBinding
 import com.bumptech.glide.Glide
+import okhttp3.internal.notify
 
 class LibraryFragment : Fragment() {
     companion object {
         fun newInstance() = LibraryFragment()
-        var sendList = arrayListOf<KakaoData>()
-        val testList = arrayListOf<KakaoData>()
     }
-    private val testSet = mutableSetOf<KakaoData>()
+
 
     private var _binding: LibraryFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private val recyclerViewAdapter by lazy{
-        SearchAdapter(testList)
+    private val recyclerViewAdapter by lazy {
+        LibraryAdapter(KakaoList)
     }
-
+    private val KakaoList = arrayListOf<KakaoData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,67 +43,48 @@ class LibraryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.adapter = recyclerViewAdapter
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val itemList = bundle.getParcelableArrayList<KakaoData>("item")!!
-
-//            sendList.clear()
-            for (i in 0 until itemList.size) {
-                if (itemList[i] !in testSet) {
-                    testSet.add(itemList[i])
-                    recyclerViewAdapter.addItem(itemList[i])
-                }
-            }
-            itemList.clear()
-        }
-
-
-        recyclerViewAdapter.itemClick = object : SearchAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-
-                sendList.add(recyclerViewAdapter.getList(position))
-
-                setFragmentResult("favorite", bundleOf("removedata" to sendList))
-                testList.remove(recyclerViewAdapter.getList(position))
-                Log.d("testList", testList.toString())
-                recyclerViewAdapter.deleteItemPosition(position)
-            }
-        }
+        initView()
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        KakaoList.clear()
+        recyclerViewAdapter.notifyDataSetChanged()
+    }
 
-//        initView()
-
-
-//    private fun initView() = with(binding) {
-//        setFragmentResultListener("requestKey") { requestKey, bundle ->
-//            val itemList = bundle.getParcelableArrayList<KakaoData>("item")!!
-//
-//            for (i in 0 until itemList.size) {
-//                if (itemList[i] !in testSet) {
-//                    testSet.add(itemList[i])
-//                    recyclerViewAdapter.addItem(itemList[i])
-//                }
-//            }
-//            itemList.clear()
-//        }
-//
-//        recyclerView.adapter = recyclerViewAdapter
-//        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-//    }
-
-//            for (i in 0 until itemList.size) {
-//                if (itemList[i] !in testSet) {
-//                    testSet.add(itemList[i])
-//                    recyclerViewAdapter.addItem(itemList[i])
-//                }
-//            }
-//            itemList.clear()
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun initView() = with(binding) {
+
+        /**
+         *  리사이클러뷰 어댑터, 레이아웃매니저 설정
+         */
+        recyclerView.adapter = recyclerViewAdapter
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        /**
+         *  라이브러리에 '좋아요' 연락처 추가
+         */
+        setFragmentResultListener("requestKey") { requestKey, bundle ->
+            val itemList = bundle.getParcelableArrayList<KakaoData>("item")!!
+
+            recyclerViewAdapter.addItems(itemList)
+
+            itemList.clear()
+        }
+
+        /**
+         *  클릭시 라이브러리에서 연락처 삭제
+         */
+        recyclerViewAdapter.itemClick = object : LibraryAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+
+                recyclerViewAdapter.deleteItemPosition(position)
+            }
+        }
     }
 }

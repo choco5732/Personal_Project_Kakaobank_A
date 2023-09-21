@@ -33,5 +33,4 @@ object NetworkClient {
         .build()
 
     val kakaoNetWork: NetWorkInterface = kakaoRetrofit.create(NetWorkInterface::class.java)
-
 }
