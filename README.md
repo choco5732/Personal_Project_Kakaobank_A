@@ -21,3 +21,14 @@
 
    ![image](https://github.com/choco5732/Personal_Project_Retrofit/assets/81561579/90966f87-f40a-4dcd-a612-ecdb5e5e267f)
 
+
+# 작동 사진
+1. 검색어를 입력하고 검색하면 리사이클러뷰에 그리드 형식으로 이미지들이 출력됩니다.
+   이미지를 클릭하면 체크 표시가 되고 라이브러리에 추가됩니다.
+   ![image](https://github.com/choco5732/Personal_Project_Retrofit/assets/81561579/a73df7f9-a98d-49b4-9273-de0d9a538899)
+
+
+2. 라이브러리에 사진이 추가되었고 클릭 시 라이브러리에서 사진이 삭제됩니다.
+   ![image](https://github.com/choco5732/Personal_Project_Retrofit/assets/81561579/cdffdcf4-47b9-44b0-9692-54ffa7222bac)
+
+![image](https://github.com/choco5732/Personal_Project_Retrofit/assets/81561579/3e5055a1-923f-4ab6-a88e-4575ad55d8c7)
