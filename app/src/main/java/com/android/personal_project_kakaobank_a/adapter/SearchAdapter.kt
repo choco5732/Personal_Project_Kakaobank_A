@@ -3,6 +3,7 @@ package com.android.personal_project_kakaobank_a.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.SearchItemBinding
@@ -12,11 +13,45 @@ class SearchAdapter(
     val list: MutableList<KakaoData>
 //  , private val onClickItem: (Int, KakaoData) -> Unit
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
-interface ItemClick {
-    fun onClick(view: View, position: Int)
-}
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
 
-var itemClick: ItemClick? = null
+    var itemClick: ItemClick? = null
+
+    fun addItems(itemList: List<KakaoData>?){
+        if (itemList == null) {
+            return
+        }
+        list.addAll(itemList)
+//        notifyItemChanged(list.size - 1)
+        notifyDataSetChanged()
+    }
+    fun addItem(item: KakaoData?) {
+        if (item == null) {
+            return
+        }
+        list.add(item)
+        notifyDataSetChanged()
+    }
+
+    fun deleteItem(item: KakaoData?) {
+        if (item == null) {
+            return
+        }
+        list.remove(item)
+        notifyDataSetChanged()
+    }
+
+    fun deleteItemPosition(position: Int?){
+        if (position != null) {
+            list.removeAt(position)
+        }
+        notifyDataSetChanged()
+    }
+    fun getList(position: Int): KakaoData {
+        return list[position]
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -42,6 +77,8 @@ var itemClick: ItemClick? = null
             Glide.with(root)
                 .load(item.thumbnail_url)
                 .into(thumbnail)
+
+            icCheck.isVisible = item.isAdd == true
 
             siteName.text = item.displaySiteName
             dateTime.text = item.dateTime

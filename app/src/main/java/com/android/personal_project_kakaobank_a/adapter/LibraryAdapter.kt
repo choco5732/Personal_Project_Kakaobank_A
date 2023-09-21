@@ -1,7 +1,9 @@
 package com.android.personal_project_kakaobank_a.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
@@ -9,6 +11,7 @@ import com.bumptech.glide.Glide
 
 class LibraryAdapter(
     val list: MutableList<KakaoData>
+//  , private val onClickItem: (Int, KakaoData) -> Unit
 ) : RecyclerView.Adapter<LibraryAdapter.ViewHolder>() {
 
     fun addItems(itemList: List<KakaoData>?){
@@ -17,7 +20,7 @@ class LibraryAdapter(
         }
 
         list.addAll(itemList)
-//        notifyItemChanged(list.size - 1) 성능향상을 위해 사용할려 했으나.. 검색을 여러번 했을 시 에러가 발생해 주석..
+//        notifyItemChanged(list.size - 1)
         notifyDataSetChanged()
     }
     fun addItem(item: KakaoData?) {
@@ -25,6 +28,14 @@ class LibraryAdapter(
             return
         }
         list.add(item)
+        notifyDataSetChanged()
+    }
+
+    fun deleteItem(item: KakaoData?) {
+        if (item == null) {
+            return
+        }
+        list.remove(item)
         notifyDataSetChanged()
     }
 
@@ -42,6 +53,7 @@ class LibraryAdapter(
     override fun getItemCount(): Int {
         return list.size
     }
+
 
 
     inner class ViewHolder(
