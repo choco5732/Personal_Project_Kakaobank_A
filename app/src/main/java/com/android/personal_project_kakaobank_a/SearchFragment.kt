@@ -17,14 +17,14 @@ import com.android.personal_project_kakaobank_a.retrofit.NetworkClient
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
-
-    private var _binding: SearchFragmentBinding? = null
-    private val binding get() = _binding!!
-
     companion object {
         fun newInstance() = SearchFragment()
         val test = arrayListOf<KakaoData>()
     }
+
+    private var _binding: SearchFragmentBinding? = null
+    private val binding get() = _binding!!
+
 
     val testList = arrayListOf<KakaoData>()
 
@@ -43,30 +43,52 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
-    }
 
+        initView()
+
+    }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
     }
+
+    override fun onPause() {
+        super.onPause()
+        test.clear()
+        recyclerViewAdpater.notifyDataSetChanged()
+    }
     private fun initView() = with(binding){
 
+        /**
+         * 리사이클러뷰 어댑터, 레이아웃매니저 설정
+         */
+        recyclerView.adapter = recyclerViewAdpater
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+
+        // SharedPreferences -> 마지막 검색어 호출
         loadData()
 
+
+        /**
+         *  '검색 버튼' 클릭 시 EditText에 입력한 값으로 쿼리를 보내
+         *  서버로부터 데이터를 받아와 리사이클러뷰에 적용해 화면에 보여주는 코드
+         */
         btnSearch.setOnClickListener {
             test.clear()
             recyclerViewAdpater.notifyDataSetChanged()
             val query = etSearchKeyword.text.toString()
             Log.d("SearchFragment","#choco5732 query : $query")
             communicateNetWork(setUpKakaoParameter(query))
+
+            // SharedPreferences -> 검색어 저장
             saveData()
         }
 
-        recyclerView.adapter = recyclerViewAdpater
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-
+        /**
+         * 연락처 클릭 시 라이브러리에 추가하는 로직
+         */
         recyclerViewAdpater.itemClick = object : SearchAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
                 test[position].isAdd = !test[position].isAdd
@@ -78,17 +100,17 @@ class SearchFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        test.clear()
-        recyclerViewAdpater.notifyDataSetChanged()
-    }
-
+    /**
+     * SharedPreferences -> 검색어 불러오기
+     */
     private fun loadData() {
         val preference = this.activity?.getSharedPreferences("preference",0)
         binding.etSearchKeyword.setText(preference?.getString("searchKeyword",""))
     }
 
+    /**
+     * SharedPreferences -> 검색어 저장
+     */
     private fun saveData() {
         val preference = this.activity?.getSharedPreferences("preference", 0)
         val edit = preference?.edit()
@@ -97,6 +119,9 @@ class SearchFragment : Fragment() {
         Log.d("SearchFragment", "#choco5732 searchKeyword: ${binding.etSearchKeyword.text.toString()}")
     }
 
+    /**
+     * GET요청에 쓰일 파라메터
+     */
     private fun setUpKakaoParameter(query: String): HashMap<String, String> {
         return hashMapOf(
             "query" to query,
@@ -104,6 +129,9 @@ class SearchFragment : Fragment() {
         )
     }
 
+    /**
+     * 서버로부터 데이터를 받아오는 로직
+     */
     private fun communicateNetWork(param: HashMap<String, String>) = lifecycleScope.launch() {
         val responseData = NetworkClient.kakaoNetWork.getKakao(param = param)
         Log.e("SearchFragment", "#choco5732 받은 데이터 : $responseData")

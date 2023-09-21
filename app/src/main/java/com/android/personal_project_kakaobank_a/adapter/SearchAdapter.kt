@@ -11,38 +11,12 @@ import com.bumptech.glide.Glide
 
 class SearchAdapter(
     val list: MutableList<KakaoData>
-//  , private val onClickItem: (Int, KakaoData) -> Unit
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     interface ItemClick {
         fun onClick(view: View, position: Int)
     }
 
     var itemClick: ItemClick? = null
-
-    fun addItems(itemList: List<KakaoData>?){
-        if (itemList == null) {
-            return
-        }
-        list.addAll(itemList)
-//        notifyItemChanged(list.size - 1)
-        notifyDataSetChanged()
-    }
-    fun addItem(item: KakaoData?) {
-        if (item == null) {
-            return
-        }
-        list.add(item)
-        notifyDataSetChanged()
-    }
-
-    fun deleteItem(item: KakaoData?) {
-        if (item == null) {
-            return
-        }
-        list.remove(item)
-        notifyDataSetChanged()
-    }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

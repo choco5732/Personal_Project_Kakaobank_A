@@ -1,22 +1,15 @@
 package com.android.personal_project_kakaobank_a
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.adapter.LibraryAdapter
-import com.android.personal_project_kakaobank_a.adapter.SearchAdapter
 import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.LibraryFragmentBinding
-import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBinding
-import com.bumptech.glide.Glide
-import okhttp3.internal.notify
 
 class LibraryFragment : Fragment() {
     companion object {
@@ -83,7 +76,7 @@ class LibraryFragment : Fragment() {
         recyclerViewAdapter.itemClick = object : LibraryAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
 
-                recyclerViewAdapter.deleteItemPosition(position)
+                recyclerViewAdapter.deleteItem(position)
             }
         }
     }
