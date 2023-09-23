@@ -17,12 +17,12 @@ class SearchViewModel : ViewModel() {
         if (item == null) {
             return
         }
-        val currentList = list.value!!.toMutableList()
-        currentList?.add(item.copy(
+        val currentList = list.value.orEmpty().toMutableList()
+
+        currentList.add(item.copy(
             id = idGenerate.getAndIncrement()
-        ))
+            )
+        )
         _list.value = currentList
     }
-
-
 }

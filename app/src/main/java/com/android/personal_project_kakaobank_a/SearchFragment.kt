@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.adapter.SearchAdapter
@@ -32,6 +34,8 @@ class SearchFragment : Fragment() {
         SearchAdapter()
         }
 
+    private val viewModel: SearchViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,11 +57,6 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
     }
 
-    override fun onPause() {
-        super.onPause()
-        test.clear()
-        recyclerViewAdpater.notifyDataSetChanged()
-    }
     private fun initView() = with(binding){
 
         /**
@@ -70,13 +69,18 @@ class SearchFragment : Fragment() {
         // SharedPreferences -> 마지막 검색어 호출
         loadData()
 
+        with(viewModel) {
+            list.observe(viewLifecycleOwner) {
+                recyclerViewAdpater.submitList(it)
+            }
+        }
+
 
         /**
          *  '검색 버튼' 클릭 시 EditText에 입력한 값으로 쿼리를 보내
          *  서버로부터 데이터를 받아와 리사이클러뷰에 적용해 화면에 보여주는 코드
          */
         btnSearch.setOnClickListener {
-            test.clear()
             recyclerViewAdpater.notifyDataSetChanged()
             val query = etSearchKeyword.text.toString()
             Log.d("SearchFragment","#choco5732 query : $query")
@@ -134,14 +138,13 @@ class SearchFragment : Fragment() {
      */
     private fun communicateNetWork(param: HashMap<String, String>) = lifecycleScope.launch() {
         val responseData = NetworkClient.kakaoNetWork.getKakao(param = param)
-        Log.e("SearchFragment", "#choco5732 받은 데이터 : $responseData")
 
         val item = responseData.documents
 
         item.forEach {
-            test.add(KakaoModel(it.thumbnailUrl, it.displaySitename, it.datetime, false))
+            viewModel.addSearchItem(KakaoModel(thumbnail_url = it.thumbnailUrl, displaySiteName = it.displaySitename, dateTime = it.datetime, isAdd = false))
         }
 
-        Log.d("SearchFragment", "#choco5732 testList : $test")
+
     }
 }

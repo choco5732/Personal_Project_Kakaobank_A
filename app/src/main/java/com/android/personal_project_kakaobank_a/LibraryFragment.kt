@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.adapter.LibraryAdapter
 import com.android.personal_project_kakaobank_a.data.KakaoModel
@@ -25,6 +27,7 @@ class LibraryFragment : Fragment() {
     }
     private val KakaoList = arrayListOf<KakaoModel>()
 
+    private val viewModel: LibraryViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,13 +62,20 @@ class LibraryFragment : Fragment() {
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
+        with(viewModel) {
+            list.observe(viewLifecycleOwner){
+                recyclerViewAdapter.submitList(it)
+            }
+        }
+
+
         /**
          *  라이브러리에 '좋아요' 연락처 추가
          */
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val itemList = bundle.getParcelableArrayList<KakaoModel>("item")!!
 
-            recyclerViewAdapter.addItems(itemList)
+//            recyclerViewAdapter.addItems(itemList)
 
             itemList.clear()
         }
@@ -76,7 +86,7 @@ class LibraryFragment : Fragment() {
         recyclerViewAdapter.itemClick = object : LibraryAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
 
-                recyclerViewAdapter.deleteItem(position)
+//                recyclerViewAdapter.deleteItem(position)
             }
         }
     }
