@@ -7,23 +7,23 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.personal_project_kakaobank_a.data.KakaoData
+import com.android.personal_project_kakaobank_a.data.KakaoModel
 import com.android.personal_project_kakaobank_a.databinding.SearchItemBinding
 import com.bumptech.glide.Glide
 
 class SearchAdapter(
-) : ListAdapter<KakaoData, SearchAdapter.ViewHolder>(
-    object : DiffUtil.ItemCallback<KakaoData>() {
+) : ListAdapter<KakaoModel, SearchAdapter.ViewHolder>(
+    object : DiffUtil.ItemCallback<KakaoModel>() {
         override fun areItemsTheSame(
-            oldItem: KakaoData,
-            newItem: KakaoData
+            oldItem: KakaoModel,
+            newItem: KakaoModel
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: KakaoData,
-            newItem: KakaoData
+            oldItem: KakaoModel,
+            newItem: KakaoModel
         ): Boolean {
             return oldItem == newItem
         }
@@ -50,7 +50,7 @@ class SearchAdapter(
         private val binding: SearchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: KakaoData) = with(binding) {
+        fun bind(item: KakaoModel) = with(binding) {
 
             Glide.with(root)
                 .load(item.thumbnail_url)

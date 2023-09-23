@@ -11,7 +11,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.adapter.SearchAdapter
-import com.android.personal_project_kakaobank_a.data.KakaoData
+import com.android.personal_project_kakaobank_a.data.KakaoModel
 import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBinding
 import com.android.personal_project_kakaobank_a.retrofit.NetworkClient
 import kotlinx.coroutines.launch
@@ -19,17 +19,17 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment() {
     companion object {
         fun newInstance() = SearchFragment()
-        val test = arrayListOf<KakaoData>()
+        val test = arrayListOf<KakaoModel>()
     }
 
     private var _binding: SearchFragmentBinding? = null
     private val binding get() = _binding!!
 
 
-    val testList = arrayListOf<KakaoData>()
+    val testList = arrayListOf<KakaoModel>()
 
     private val recyclerViewAdpater by lazy {
-        SearchAdapter(test)
+        SearchAdapter()
         }
 
 
@@ -139,7 +139,7 @@ class SearchFragment : Fragment() {
         val item = responseData.documents
 
         item.forEach {
-            test.add(KakaoData(it.thumbnailUrl, it.displaySitename, it.datetime, false))
+            test.add(KakaoModel(it.thumbnailUrl, it.displaySitename, it.datetime, false))
         }
 
         Log.d("SearchFragment", "#choco5732 testList : $test")

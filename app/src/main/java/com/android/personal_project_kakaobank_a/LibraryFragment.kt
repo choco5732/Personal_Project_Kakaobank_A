@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.adapter.LibraryAdapter
-import com.android.personal_project_kakaobank_a.data.KakaoData
+import com.android.personal_project_kakaobank_a.data.KakaoModel
 import com.android.personal_project_kakaobank_a.databinding.LibraryFragmentBinding
 
 class LibraryFragment : Fragment() {
@@ -23,7 +23,7 @@ class LibraryFragment : Fragment() {
     private val recyclerViewAdapter by lazy {
         LibraryAdapter()
     }
-    private val KakaoList = arrayListOf<KakaoData>()
+    private val KakaoList = arrayListOf<KakaoModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +63,7 @@ class LibraryFragment : Fragment() {
          *  라이브러리에 '좋아요' 연락처 추가
          */
         setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val itemList = bundle.getParcelableArrayList<KakaoData>("item")!!
+            val itemList = bundle.getParcelableArrayList<KakaoModel>("item")!!
 
             recyclerViewAdapter.addItems(itemList)
 

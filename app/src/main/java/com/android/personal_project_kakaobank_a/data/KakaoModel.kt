@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class KakaoData(
-    val id: Long?,
+data class KakaoModel(
+    val id: Long = -1,
     val thumbnail_url: String,
     val displaySiteName: String,
     val dateTime: String,
