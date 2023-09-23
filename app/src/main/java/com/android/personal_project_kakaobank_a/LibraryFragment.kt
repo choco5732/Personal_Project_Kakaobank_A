@@ -21,7 +21,7 @@ class LibraryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val recyclerViewAdapter by lazy {
-        LibraryAdapter(KakaoList)
+        LibraryAdapter()
     }
     private val KakaoList = arrayListOf<KakaoData>()
 

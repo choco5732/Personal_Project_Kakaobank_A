@@ -4,14 +4,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.SearchItemBinding
 import com.bumptech.glide.Glide
 
 class SearchAdapter(
-    val list: MutableList<KakaoData>
-) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+) : ListAdapter<KakaoData, SearchAdapter.ViewHolder>(
+    object : DiffUtil.ItemCallback<KakaoData>() {
+        override fun areItemsTheSame(
+            oldItem: KakaoData,
+            newItem: KakaoData
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: KakaoData,
+            newItem: KakaoData
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
+) {
     interface ItemClick {
         fun onClick(view: View, position: Int)
     }
@@ -25,12 +42,8 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = list[position]
+        val item = getItem(position)
         holder.bind(item)
-    }
-
-    override fun getItemCount(): Int {
-        return list.size
     }
 
     inner class ViewHolder(
