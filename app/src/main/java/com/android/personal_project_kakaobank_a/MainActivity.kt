@@ -37,8 +37,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun addBookmarkItem(item: KakaoModel) {
-        val fragment = adapter.getFragment(1) as? LibraryFragment
-        fragment?.addItem(item)
-    }
 }

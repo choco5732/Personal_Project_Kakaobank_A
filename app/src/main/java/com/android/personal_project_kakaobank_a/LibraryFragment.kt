@@ -5,9 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.adapter.LibraryAdapter
 import com.android.personal_project_kakaobank_a.data.KakaoModel
@@ -28,6 +27,7 @@ class LibraryFragment : Fragment() {
     private val KakaoList = arrayListOf<KakaoModel>()
 
     private val viewModel: LibraryViewModel by viewModels()
+    private val sharedViewModel: MainSharedViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,15 +60,21 @@ class LibraryFragment : Fragment() {
         with(viewModel) {
             list.observe(viewLifecycleOwner) {
                 recyclerViewAdapter.submitList(it)
+
+            }
+        }
+
+        with(sharedViewModel) {
+            libraryEvent.observe(viewLifecycleOwner) { event ->
+                when (event) {
+                    is MainSharedEventForLibrary.UpdateLibraryItems -> {
+                        viewModel.updateLibraryItems(event.items)
+                    }
+
+                    else -> Unit
+                }
             }
         }
     }
 
-
-
-    fun addItem(
-        item: KakaoModel
-    ) {
-        viewModel.addLibraryItem(item)
-    }
 }
