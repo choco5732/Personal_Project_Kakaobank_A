@@ -30,11 +30,10 @@ class SearchFragment : Fragment() {
 
     private val recyclerViewAdpater by lazy {
         SearchAdapter(
-            onItemClick = { position, item->
+            onItemClick = { position, item ->
                 viewModel.modifyKakaoItem(
                     item = item
                 )
-//                Log.d("SearchFragment","#choco5732 눌렀을시 isAdd 테스트 : ${item.isAdd}")
             }
         )
     }
@@ -64,7 +63,7 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun initView() = with(binding){
+    private fun initView() = with(binding) {
 
         /**
          * 리사이클러뷰 어댑터, 레이아웃매니저 설정
@@ -84,7 +83,7 @@ class SearchFragment : Fragment() {
             //recyclerViewAdpater.notifyDataSetChanged()
             viewModel.removeKakaoItems()
             val query = etSearchKeyword.text.toString()
-            Log.d("SearchFragment","#choco5732 query : $query")
+            Log.d("SearchFragment", "#choco5732 query : $query")
             communicateNetWork(setUpKakaoParameter(query))
 
             // SharedPreferences -> 검색어 저장
@@ -98,14 +97,24 @@ class SearchFragment : Fragment() {
             }
         }
 
+        with(sharedViewModel) {
+            searchEvent.observe(viewLifecycleOwner) { event ->
+                when (event) {
+                    is MainSharedEventForSearch.UpdateSearchItem -> {
+                        viewModel.modifyKakaoItem(event.item)
+                        Log.d("SearchFragment", "#choco5732 event아이템의 정체는 : ${event.item}")
+                    }
+                }
+            }
+        }
     }
 
     /**
      * SharedPreferences -> 검색어 불러오기
      */
     private fun loadData() {
-        val preference = this.activity?.getSharedPreferences("preference",0)
-        binding.etSearchKeyword.setText(preference?.getString("searchKeyword",""))
+        val preference = this.activity?.getSharedPreferences("preference", 0)
+        binding.etSearchKeyword.setText(preference?.getString("searchKeyword", ""))
     }
 
     /**
@@ -116,7 +125,10 @@ class SearchFragment : Fragment() {
         val edit = preference?.edit()
         edit?.putString("searchKeyword", binding.etSearchKeyword.text.toString())
         edit?.apply()
-        Log.d("SearchFragment", "#choco5732 searchKeyword: ${binding.etSearchKeyword.text.toString()}")
+        Log.d(
+            "SearchFragment",
+            "#choco5732 searchKeyword: ${binding.etSearchKeyword.text.toString()}"
+        )
     }
 
     /**
@@ -138,9 +150,14 @@ class SearchFragment : Fragment() {
         val item = responseData.documents
 
         item.forEach {
-            viewModel.addSearchItem(KakaoModel(thumbnail_url = it.thumbnailUrl, displaySiteName = it.displaySitename, dateTime = it.datetime, isAdd = false))
+            viewModel.addSearchItem(
+                KakaoModel(
+                    thumbnail_url = it.thumbnailUrl,
+                    displaySiteName = it.displaySitename,
+                    dateTime = it.datetime,
+                    isAdd = false
+                )
+            )
         }
-
-
     }
 }

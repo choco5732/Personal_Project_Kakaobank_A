@@ -19,7 +19,6 @@ class LibraryViewModel : ViewModel() {
     }
 
     fun removeLibraryItem(position: Int) {
-
         if (position < 0) {
             return
         }

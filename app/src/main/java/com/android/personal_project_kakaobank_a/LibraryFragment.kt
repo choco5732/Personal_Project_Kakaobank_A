@@ -24,7 +24,7 @@ class LibraryFragment : Fragment() {
     private val recyclerViewAdapter by lazy {
         LibraryAdapter { position, item ->
             viewModel.removeLibraryItem(position)
-//            sharedViewModel.updateSearchItem(item)
+            sharedViewModel.updateSearchItem(item)
         }
     }
 
@@ -60,7 +60,6 @@ class LibraryFragment : Fragment() {
         with(viewModel) {
             list.observe(viewLifecycleOwner) {
                 recyclerViewAdapter.submitList(it)
-
             }
         }
 

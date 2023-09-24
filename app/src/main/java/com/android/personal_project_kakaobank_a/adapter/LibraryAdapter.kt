@@ -64,7 +64,7 @@ class LibraryAdapter(
                     adapterPosition,
                     item
                 )
-                Log.d("LibraryAdapter", "#choco5732 라이브러리서 눌렀을시 isAdd 테스트 : ${item.isAdd}")
+                Log.d("LibraryAdapter", "#choco5732 라이브러리서 눌렀을시 isAdd 값은? : ${item.isAdd}")
             }
         }
     }
