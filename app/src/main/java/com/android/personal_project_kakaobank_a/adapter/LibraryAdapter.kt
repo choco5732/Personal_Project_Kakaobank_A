@@ -1,5 +1,6 @@
 package com.android.personal_project_kakaobank_a.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
 import com.bumptech.glide.Glide
 
 class LibraryAdapter(
-
+    private val onItemClick: (Int, KakaoModel) -> Unit
 ) : ListAdapter<KakaoModel, LibraryAdapter.ViewHolder>(
 
     object : DiffUtil.ItemCallback<KakaoModel>() {
@@ -30,15 +31,11 @@ class LibraryAdapter(
         }
     }
 ) {
-    interface ItemClick {
-        fun onClick(view: View, position: Int)
-    }
-    var itemClick: ItemClick? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LibraryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            LibraryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onItemClick
         )
     }
 
@@ -47,8 +44,9 @@ class LibraryAdapter(
         holder.bind(item)
     }
 
-    inner class ViewHolder(
-        private val binding: LibraryItemBinding
+    class ViewHolder(
+        private val binding: LibraryItemBinding,
+        private val onItemClick: (Int, KakaoModel) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: KakaoModel) = with(binding) {
@@ -61,23 +59,13 @@ class LibraryAdapter(
             dateTime.text = item.dateTime
 
             container.setOnClickListener {
-                itemClick?.onClick(it, adapterPosition)
+                item.isAdd = false
+                onItemClick(
+                    adapterPosition,
+                    item
+                )
+                Log.d("LibraryAdapter", "#choco5732 라이브러리서 눌렀을시 isAdd 테스트 : ${item.isAdd}")
             }
         }
     }
 }
-//    fun addItems(itemList: List<KakaoData>?){
-//        if (itemList == null) {
-//            return
-//        }
-//        list.addAll(itemList)
-//        notifyItemChanged(list.size - 1)
-//    }
-//
-//    fun deleteItem(position: Int?){
-//        if (position == null) {
-//            return
-//        }
-//        list.removeAt(position)
-//        notifyItemRemoved(position)
-//    }

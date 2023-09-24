@@ -18,16 +18,14 @@ class LibraryViewModel : ViewModel() {
         _list.value = items
     }
 
-//    fun removeLibraryItemItem(
-//        position: Int?
-//    ) {
-//        if (position == null || position < 0) {
-//            return
-//        }
-//
-//        val currentList = list.value.orEmpty().toMutableList()
-//        currentList.removeAt(position)
-//        _list.value = currentList
-//    }
+    fun removeLibraryItem(position: Int) {
 
+        if (position < 0) {
+            return
+        }
+
+        val currentList = list.value.orEmpty().toMutableList()
+        currentList.removeAt(position)
+        _list.value = currentList
+    }
 }

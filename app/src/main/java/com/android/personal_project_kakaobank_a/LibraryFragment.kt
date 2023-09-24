@@ -22,9 +22,11 @@ class LibraryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val recyclerViewAdapter by lazy {
-        LibraryAdapter()
+        LibraryAdapter { position, item ->
+            viewModel.removeLibraryItem(position)
+//            sharedViewModel.updateSearchItem(item)
+        }
     }
-    private val KakaoList = arrayListOf<KakaoModel>()
 
     private val viewModel: LibraryViewModel by viewModels()
     private val sharedViewModel: MainSharedViewModel by activityViewModels()
@@ -40,9 +42,7 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-
     }
-
 
     override fun onDestroyView() {
         _binding = null
