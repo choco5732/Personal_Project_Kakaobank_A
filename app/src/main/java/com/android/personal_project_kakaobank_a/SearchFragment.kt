@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.adapter.SearchAdapter
@@ -31,11 +28,25 @@ class SearchFragment : Fragment() {
     val testList = arrayListOf<KakaoModel>()
 
     private val recyclerViewAdpater by lazy {
-        SearchAdapter()
-        }
+        SearchAdapter(
+            onItemClick = { position, item->
+                viewModel.modifyKakaoItem(
+                    item = item
+                )
+//                Log.d("SearchFragment","#choco5732 눌렀을시 isAdd 테스트 : ${item.isAdd}")
+            }
+        )
+    }
+
 
     private val viewModel: SearchViewModel by viewModels()
 
+
+    private fun addItemToLibraryTab(
+        item: KakaoModel
+    ) {
+        (activity as? MainActivity)?.addBookmarkItem(item)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,15 +104,15 @@ class SearchFragment : Fragment() {
         /**
          * 연락처 클릭 시 라이브러리에 추가하는 로직
          */
-        recyclerViewAdpater.itemClick = object : SearchAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-                test[position].isAdd = !test[position].isAdd
-                recyclerViewAdpater.notifyDataSetChanged()
-                val choicedItem = test[position]
-                testList.add(choicedItem)
-                setFragmentResult("requestKey", bundleOf("item" to testList))
-            }
-        }
+//        recyclerViewAdpater.itemClick = object : SearchAdapter.ItemClick {
+//            override fun onClick(view: View, position: Int) {
+//                test[position].isAdd = !test[position].isAdd
+//                recyclerViewAdpater.notifyDataSetChanged()
+//                val choicedItem = test[position]
+//                testList.add(choicedItem)
+//                setFragmentResult("requestKey", bundleOf("item" to testList))
+//            }
+//        }
     }
 
     /**

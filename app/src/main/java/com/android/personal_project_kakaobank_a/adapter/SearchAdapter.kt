@@ -1,7 +1,7 @@
 package com.android.personal_project_kakaobank_a.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
@@ -12,7 +12,9 @@ import com.android.personal_project_kakaobank_a.databinding.SearchItemBinding
 import com.bumptech.glide.Glide
 
 class SearchAdapter(
+    private val onItemClick: (Int, KakaoModel) -> Unit
 ) : ListAdapter<KakaoModel, SearchAdapter.ViewHolder>(
+
     object : DiffUtil.ItemCallback<KakaoModel>() {
         override fun areItemsTheSame(
             oldItem: KakaoModel,
@@ -29,15 +31,11 @@ class SearchAdapter(
         }
     }
 ) {
-    interface ItemClick {
-        fun onClick(view: View, position: Int)
-    }
-
-    var itemClick: ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            onItemClick
         )
     }
 
@@ -46,8 +44,9 @@ class SearchAdapter(
         holder.bind(item)
     }
 
-    inner class ViewHolder(
-        private val binding: SearchItemBinding
+    class ViewHolder(
+        private val binding: SearchItemBinding,
+        private val onItemClick: (Int, KakaoModel) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: KakaoModel) = with(binding) {
@@ -56,13 +55,23 @@ class SearchAdapter(
                 .load(item.thumbnail_url)
                 .into(thumbnail)
 
-            icCheck.isVisible = item.isAdd == true
-
             siteName.text = item.displaySiteName
             dateTime.text = item.dateTime
 
+            icCheck.isVisible = item.isAdd == true
+
             container.setOnClickListener {
-                itemClick?.onClick(it, adapterPosition)
+                item.isAdd = !item.isAdd
+                Log.d("SearchAdapter", "#choco5732 눌렀을시 isAdd 테스트 : ${item.isAdd}")
+                if (item.isAdd) {
+                    icCheck.isVisible = true
+                    onItemClick(
+                        adapterPosition,
+                        item
+                    )
+                } else {
+                    icCheck.isVisible = false
+                }
             }
         }
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.android.personal_project_kakaobank_a.adapter.ViewPagerAdapter
+import com.android.personal_project_kakaobank_a.data.KakaoModel
 import com.android.personal_project_kakaobank_a.databinding.ActivityMainBinding
 import com.android.personal_project_kakaobank_a.retrofit.NetworkClient
 import com.google.android.material.tabs.TabLayoutMediator
@@ -34,5 +35,10 @@ class MainActivity : AppCompatActivity() {
             tab.setText(adapter.getTitle(position))
         }.attach()
 
+    }
+
+    fun addBookmarkItem(item: KakaoModel) {
+        val fragment = adapter.getFragment(1) as? LibraryFragment
+        fragment?.addItem(item)
     }
 }

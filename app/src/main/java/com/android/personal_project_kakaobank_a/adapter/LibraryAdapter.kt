@@ -11,6 +11,7 @@ import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
 import com.bumptech.glide.Glide
 
 class LibraryAdapter(
+
 ) : ListAdapter<KakaoModel, LibraryAdapter.ViewHolder>(
 
     object : DiffUtil.ItemCallback<KakaoModel>() {

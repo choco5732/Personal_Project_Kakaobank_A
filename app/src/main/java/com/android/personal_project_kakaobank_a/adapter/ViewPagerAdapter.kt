@@ -33,4 +33,8 @@ class ViewPagerAdapter(
         return fragments[position].title
     }
 
+    fun getFragment(position: Int): Fragment {
+        return fragments[position].fragment
+    }
+
 }

@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class KakaoModel(
-    val id: Long = -1,
+    val id: Long? = -1,
     val thumbnail_url: String,
     val displaySiteName: String,
     val dateTime: String,

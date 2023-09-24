@@ -43,11 +43,6 @@ class LibraryFragment : Fragment() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
-        KakaoList.clear()
-        recyclerViewAdapter.notifyDataSetChanged()
-    }
 
     override fun onDestroyView() {
         _binding = null
@@ -63,31 +58,17 @@ class LibraryFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         with(viewModel) {
-            list.observe(viewLifecycleOwner){
+            list.observe(viewLifecycleOwner) {
                 recyclerViewAdapter.submitList(it)
             }
         }
+    }
 
 
-        /**
-         *  라이브러리에 '좋아요' 연락처 추가
-         */
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val itemList = bundle.getParcelableArrayList<KakaoModel>("item")!!
 
-//            recyclerViewAdapter.addItems(itemList)
-
-            itemList.clear()
-        }
-
-        /**
-         *  클릭시 라이브러리에서 연락처 삭제
-         */
-        recyclerViewAdapter.itemClick = object : LibraryAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-
-//                recyclerViewAdapter.deleteItem(position)
-            }
-        }
+    fun addItem(
+        item: KakaoModel
+    ) {
+        viewModel.addLibraryItem(item)
     }
 }
