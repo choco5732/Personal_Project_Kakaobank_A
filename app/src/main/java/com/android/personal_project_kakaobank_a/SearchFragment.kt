@@ -39,7 +39,10 @@ class SearchFragment : Fragment() {
     }
 
 
-    private val viewModel: SearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels{
+        SearchViewModelFactory()
+    }
+
     private val sharedViewModel: MainSharedViewModel by activityViewModels()
 
 
@@ -103,6 +106,7 @@ class SearchFragment : Fragment() {
                     is MainSharedEventForSearch.UpdateSearchItem -> {
                         viewModel.modifyKakaoItem(event.item)
                         Log.d("SearchFragment", "#choco5732 event아이템의 정체는 : ${event.item}")
+                        recyclerViewAdpater.notifyDataSetChanged()
                     }
                 }
             }

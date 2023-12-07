@@ -3,15 +3,17 @@ package com.android.personal_project_kakaobank_a
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.android.personal_project_kakaobank_a.data.KakaoModel
 import java.util.concurrent.atomic.AtomicLong
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel(
+    private val idGenerate: AtomicLong
+) : ViewModel() {
 
     private val _list: MutableLiveData<List<KakaoModel>> = MutableLiveData()
     val list: LiveData<List<KakaoModel>> get() = _list
 
-    private val idGenerate = AtomicLong(1L)
 
     fun addSearchItem(item: KakaoModel?) {
         if (item == null) {
@@ -48,7 +50,6 @@ class SearchViewModel : ViewModel() {
             return
         }
 
-
         val currentList = list.value.orEmpty().toMutableList()
         currentList[findPostion] = item
         _list.value = currentList
@@ -58,5 +59,19 @@ class SearchViewModel : ViewModel() {
         val currentList = list.value.orEmpty().toMutableList()
         currentList.clear()
         _list.value = currentList
+    }
+}
+
+class SearchViewModelFactory : ViewModelProvider.Factory {
+
+    // id 를 부여할 값
+    private val idGenerate = AtomicLong(1L)
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
+            return SearchViewModel(idGenerate) as T
+        } else {
+            throw IllegalArgumentException("Not found ViewModel class.")
+        }
     }
 }

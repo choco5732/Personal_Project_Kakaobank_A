@@ -34,7 +34,5 @@ class MainActivity : AppCompatActivity() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.setText(adapter.getTitle(position))
         }.attach()
-
     }
-
 }
