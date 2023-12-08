@@ -81,7 +81,8 @@ class SearchFragment : Fragment() {
          *  서버로부터 데이터를 받아와 리사이클러뷰에 적용해 화면에 보여주는 코드
          */
         btnSearch.setOnClickListener {
-            recyclerViewAdpater.notifyDataSetChanged()
+            //recyclerViewAdpater.notifyDataSetChanged()
+            viewModel.removeKakaoItems()
             val query = etSearchKeyword.text.toString()
             Log.d("SearchFragment","#choco5732 query : $query")
             communicateNetWork(setUpKakaoParameter(query))

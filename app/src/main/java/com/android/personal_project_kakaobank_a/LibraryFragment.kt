@@ -70,11 +70,11 @@ class LibraryFragment : Fragment() {
                     is MainSharedEventForLibrary.UpdateLibraryItems -> {
                         viewModel.updateLibraryItems(event.items)
                     }
-
                     else -> Unit
                 }
             }
         }
+
     }
 
 }

@@ -53,4 +53,10 @@ class SearchViewModel : ViewModel() {
         currentList[findPostion] = item
         _list.value = currentList
     }
+
+    fun removeKakaoItems() {
+        val currentList = list.value.orEmpty().toMutableList()
+        currentList.clear()
+        _list.value = currentList
+    }
 }
