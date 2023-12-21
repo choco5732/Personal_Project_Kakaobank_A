@@ -13,6 +13,11 @@ class LibraryAdapter(
     val list: MutableList<KakaoData>
 //  , private val onClickItem: (Int, KakaoData) -> Unit
 ) : RecyclerView.Adapter<LibraryAdapter.ViewHolder>() {
+    interface ItemClick {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick: ItemClick? = null
 
     fun addItems(itemList: List<KakaoData>?){
         if (itemList == null) {
@@ -31,12 +36,24 @@ class LibraryAdapter(
         notifyDataSetChanged()
     }
 
-    fun deleteItem(item: KakaoData?) {
-        if (item == null) {
+//    fun deleteItem(item: KakaoData?) {
+//        if (item == null) {
+//            return
+//        }
+//        list.remove(item)
+//        notifyDataSetChanged()
+//    }
+
+    fun deleteItemPosition(position: Int?){
+        if (position == null) {
             return
         }
-        list.remove(item)
+        list.removeAt(position)
         notifyDataSetChanged()
+    }
+
+    fun getList(position: Int): KakaoData {
+        return list[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -68,6 +85,10 @@ class LibraryAdapter(
 
             siteName.text = item.displaySiteName
             dateTime.text = item.dateTime
+
+            container.setOnClickListener {
+                itemClick?.onClick(it, adapterPosition)
+            }
 
         }
     }

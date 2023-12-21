@@ -43,15 +43,6 @@ class SearchAdapter(
         notifyDataSetChanged()
     }
 
-    fun deleteItemPosition(position: Int?){
-        if (position != null) {
-            list.removeAt(position)
-        }
-        notifyDataSetChanged()
-    }
-    fun getList(position: Int): KakaoData {
-        return list[position]
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(

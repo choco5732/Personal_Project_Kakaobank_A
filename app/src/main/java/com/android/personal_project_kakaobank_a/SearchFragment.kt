@@ -52,6 +52,7 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
     }
     private fun initView() = with(binding){
+
         loadData()
 
         btnSearch.setOnClickListener {
@@ -75,6 +76,12 @@ class SearchFragment : Fragment() {
                 setFragmentResult("requestKey", bundleOf("item" to testList))
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        test.clear()
+        recyclerViewAdpater.notifyDataSetChanged()
     }
 
     private fun loadData() {
