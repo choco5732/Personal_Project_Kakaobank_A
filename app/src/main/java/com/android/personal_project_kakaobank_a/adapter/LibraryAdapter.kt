@@ -3,7 +3,6 @@ package com.android.personal_project_kakaobank_a.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.android.personal_project_kakaobank_a.data.KakaoData
 import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
@@ -11,49 +10,26 @@ import com.bumptech.glide.Glide
 
 class LibraryAdapter(
     val list: MutableList<KakaoData>
-//  , private val onClickItem: (Int, KakaoData) -> Unit
 ) : RecyclerView.Adapter<LibraryAdapter.ViewHolder>() {
     interface ItemClick {
         fun onClick(view: View, position: Int)
     }
-
     var itemClick: ItemClick? = null
 
     fun addItems(itemList: List<KakaoData>?){
         if (itemList == null) {
             return
         }
-
         list.addAll(itemList)
-//        notifyItemChanged(list.size - 1)
-        notifyDataSetChanged()
-    }
-    fun addItem(item: KakaoData?) {
-        if (item == null) {
-            return
-        }
-        list.add(item)
-        notifyDataSetChanged()
+        notifyItemChanged(list.size - 1)
     }
 
-//    fun deleteItem(item: KakaoData?) {
-//        if (item == null) {
-//            return
-//        }
-//        list.remove(item)
-//        notifyDataSetChanged()
-//    }
-
-    fun deleteItemPosition(position: Int?){
+    fun deleteItem(position: Int?){
         if (position == null) {
             return
         }
         list.removeAt(position)
-        notifyDataSetChanged()
-    }
-
-    fun getList(position: Int): KakaoData {
-        return list[position]
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -71,8 +47,6 @@ class LibraryAdapter(
         return list.size
     }
 
-
-
     inner class ViewHolder(
         private val binding: LibraryItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -89,7 +63,6 @@ class LibraryAdapter(
             container.setOnClickListener {
                 itemClick?.onClick(it, adapterPosition)
             }
-
         }
     }
 }
