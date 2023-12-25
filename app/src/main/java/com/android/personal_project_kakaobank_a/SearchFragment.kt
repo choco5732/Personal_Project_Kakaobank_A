@@ -42,20 +42,28 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
 
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+    private fun initView() = with(binding){
         loadData()
 
-        binding.btnSearch.setOnClickListener {
+        btnSearch.setOnClickListener {
             test.clear()
             recyclerViewAdpater.notifyDataSetChanged()
-            val query = binding.etSearchKeyword.text.toString()
+            val query = etSearchKeyword.text.toString()
             Log.d("SearchFragment","#choco5732 query : $query")
             communicateNetWork(setUpKakaoParameter(query))
             saveData()
         }
-        binding.recyclerView.adapter = recyclerViewAdpater
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
+        recyclerView.adapter = recyclerViewAdpater
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         recyclerViewAdpater.itemClick = object : SearchAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
@@ -66,10 +74,9 @@ class SearchFragment : Fragment() {
         }
     }
 
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
+    private fun loadData() {
+        val preference = this.activity?.getSharedPreferences("preference",0)
+        binding.etSearchKeyword.setText(preference?.getString("searchKeyword",""))
     }
 
     private fun saveData() {
@@ -79,14 +86,8 @@ class SearchFragment : Fragment() {
         edit?.apply()
         Log.d("SearchFragment", "#choco5732 searchKeyword: ${binding.etSearchKeyword.text.toString()}")
     }
-    private fun loadData() {
-        val preference = this.activity?.getSharedPreferences("preference",0)
-        binding.etSearchKeyword.setText(preference?.getString("searchKeyword",""))
-    }
-
 
     private fun setUpKakaoParameter(query: String): HashMap<String, String> {
-
         return hashMapOf(
             "query" to query,
             "size" to "80"
@@ -104,6 +105,5 @@ class SearchFragment : Fragment() {
         }
 
         Log.d("SearchFragment", "#choco5732 testList : $test")
-
     }
 }

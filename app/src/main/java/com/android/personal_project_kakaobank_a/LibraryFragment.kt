@@ -15,15 +15,16 @@ import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBindin
 import com.bumptech.glide.Glide
 
 class LibraryFragment : Fragment() {
-
-    private var _binding: LibraryFragmentBinding? = null
-    private val binding get() = _binding!!
-    private val recyclerViewAdapter by lazy{
-        LibraryAdapter(test2)
-    }
     companion object {
         fun newInstance() = LibraryFragment()
         val test2 = arrayListOf<KakaoData>()
+    }
+
+    private var _binding: LibraryFragmentBinding? = null
+    private val binding get() = _binding!!
+
+    private val recyclerViewAdapter by lazy{
+        LibraryAdapter(test2)
     }
 
     override fun onCreateView(
@@ -36,7 +37,10 @@ class LibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
 
+    private fun initView() = with(binding) {
         setFragmentResultListener("requestKey") { requestKey, bundle ->
             val itemList = bundle.getParcelableArrayList<KakaoData>("item")
             Log.d("LibraryFragment", "#choco5732 LibraryFragment :$itemList")
@@ -45,8 +49,8 @@ class LibraryFragment : Fragment() {
             itemList?.clear()
         }
 
-        binding.recyclerView.adapter = recyclerViewAdapter
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.adapter = recyclerViewAdapter
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
     override fun onDestroyView() {
