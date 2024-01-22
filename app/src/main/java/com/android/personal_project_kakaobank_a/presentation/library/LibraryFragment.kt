@@ -1,4 +1,4 @@
-package com.android.personal_project_kakaobank_a
+package com.android.personal_project_kakaobank_a.presentation.library
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.android.personal_project_kakaobank_a.adapter.LibraryAdapter
-import com.android.personal_project_kakaobank_a.data.KakaoModel
+import com.android.personal_project_kakaobank_a.MainSharedEventForLibrary
+import com.android.personal_project_kakaobank_a.MainSharedViewModel
 import com.android.personal_project_kakaobank_a.databinding.LibraryFragmentBinding
 
 class LibraryFragment : Fragment() {

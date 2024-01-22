@@ -1,9 +1,9 @@
-package com.android.personal_project_kakaobank_a
+package com.android.personal_project_kakaobank_a.presentation.library
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.personal_project_kakaobank_a.data.KakaoModel
+import com.android.personal_project_kakaobank_a.data.model.KakaoModel
 import java.util.concurrent.atomic.AtomicLong
 
 class LibraryViewModel : ViewModel() {

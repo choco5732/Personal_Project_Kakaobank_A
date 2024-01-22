@@ -1,11 +1,11 @@
-package com.android.personal_project_kakaobank_a.adapter
+package com.android.personal_project_kakaobank_a.presentation.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.android.personal_project_kakaobank_a.LibraryFragment
-import com.android.personal_project_kakaobank_a.SearchFragment
-import com.android.personal_project_kakaobank_a.data.Tab
+import com.android.personal_project_kakaobank_a.presentation.library.LibraryFragment
+import com.android.personal_project_kakaobank_a.presentation.search.SearchFragment
+import com.android.personal_project_kakaobank_a.data.model.Tab
 
 class ViewPagerAdapter(
     fragmentActivity: FragmentActivity

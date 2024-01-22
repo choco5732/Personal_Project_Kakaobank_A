@@ -1,15 +1,9 @@
-package com.android.personal_project_kakaobank_a
+package com.android.personal_project_kakaobank_a.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.lifecycleScope
-import com.android.personal_project_kakaobank_a.adapter.ViewPagerAdapter
-import com.android.personal_project_kakaobank_a.data.KakaoModel
 import com.android.personal_project_kakaobank_a.databinding.ActivityMainBinding
-import com.android.personal_project_kakaobank_a.retrofit.NetworkClient
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 

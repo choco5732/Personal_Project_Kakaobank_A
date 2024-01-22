@@ -1,7 +1,7 @@
 package com.android.personal_project_kakaobank_a.retrofit
 
 import com.android.personal_project_kakaobank_a.BuildConfig
-import com.android.personal_project_kakaobank_a.data.Kakao
+import com.android.personal_project_kakaobank_a.data.model.Kakao
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.QueryMap
@@ -12,4 +12,5 @@ interface NetWorkInterface {
         @Header("Authorization") apiKey: String = BuildConfig.REST_API_KEY,
         @QueryMap param: HashMap<String, String>
     ): Kakao
+
 }

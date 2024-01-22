@@ -1,19 +1,18 @@
-package com.android.personal_project_kakaobank_a.adapter
+package com.android.personal_project_kakaobank_a.presentation.library
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.personal_project_kakaobank_a.data.KakaoModel
-import com.android.personal_project_kakaobank_a.databinding.SearchItemBinding
+import com.android.personal_project_kakaobank_a.data.model.KakaoModel
+import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
 import com.bumptech.glide.Glide
 
-class SearchAdapter(
+class LibraryAdapter(
     private val onItemClick: (Int, KakaoModel) -> Unit
-) : ListAdapter<KakaoModel, SearchAdapter.ViewHolder>(
+) : ListAdapter<KakaoModel, LibraryAdapter.ViewHolder>(
 
     object : DiffUtil.ItemCallback<KakaoModel>() {
         override fun areItemsTheSame(
@@ -34,7 +33,7 @@ class SearchAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            SearchItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            LibraryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onItemClick
         )
     }
@@ -45,7 +44,7 @@ class SearchAdapter(
     }
 
     class ViewHolder(
-        private val binding: SearchItemBinding,
+        private val binding: LibraryItemBinding,
         private val onItemClick: (Int, KakaoModel) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -58,26 +57,13 @@ class SearchAdapter(
             siteName.text = item.displaySiteName
             dateTime.text = item.dateTime
 
-            icCheck.isVisible = item.isAdd == true
-
-//            if (item.isAdd) {
-//                icCheck.isVisible = true
-//            } else {
-//                icCheck.isVisible = false
-//            }
-
             container.setOnClickListener {
-                item.isAdd = !item.isAdd
-                Log.d("SearchAdapter", "#choco5732 눌렀을시 isAdd 테스트 : ${item.isAdd}")
-                if (item.isAdd) {
-                    icCheck.isVisible = true
-                    onItemClick(
-                        adapterPosition,
-                        item
-                    )
-                } else {
-                    icCheck.isVisible = false
-                }
+                item.isAdd = false
+                onItemClick(
+                    adapterPosition,
+                    item
+                )
+                Log.d("LibraryAdapter", "#choco5732 라이브러리서 눌렀을시 isAdd 값은? : ${item.isAdd}")
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.android.personal_project_kakaobank_a
+package com.android.personal_project_kakaobank_a.presentation.search
 
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.android.personal_project_kakaobank_a.adapter.SearchAdapter
-import com.android.personal_project_kakaobank_a.data.KakaoModel
+import com.android.personal_project_kakaobank_a.MainSharedEventForSearch
+import com.android.personal_project_kakaobank_a.MainSharedViewModel
+import com.android.personal_project_kakaobank_a.data.model.KakaoModel
 import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBinding
 import com.android.personal_project_kakaobank_a.retrofit.NetworkClient
 import kotlinx.coroutines.launch

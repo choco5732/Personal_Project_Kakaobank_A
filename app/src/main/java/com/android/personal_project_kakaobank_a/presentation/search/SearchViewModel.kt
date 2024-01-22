@@ -1,10 +1,10 @@
-package com.android.personal_project_kakaobank_a
+package com.android.personal_project_kakaobank_a.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.android.personal_project_kakaobank_a.data.KakaoModel
+import com.android.personal_project_kakaobank_a.data.model.KakaoModel
 import java.util.concurrent.atomic.AtomicLong
 
 class SearchViewModel(
