@@ -14,7 +14,7 @@ import com.android.personal_project_kakaobank_a.MainSharedEventForSearch
 import com.android.personal_project_kakaobank_a.MainSharedViewModel
 import com.android.personal_project_kakaobank_a.data.model.KakaoModel
 import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBinding
-import com.android.personal_project_kakaobank_a.retrofit.NetworkClient
+import com.android.personal_project_kakaobank_a.retrofit.RetrofitClient
 import kotlinx.coroutines.launch
 
 class SearchFragment : Fragment() {
@@ -150,7 +150,7 @@ class SearchFragment : Fragment() {
      * 서버로부터 데이터를 받아오는 로직
      */
     private fun communicateNetWork(param: HashMap<String, String>) = lifecycleScope.launch() {
-        val responseData = NetworkClient.kakaoNetWork.getKakao(param = param)
+        val responseData = RetrofitClient.search.getKakao(param = param)
 
         val item = responseData.documents
 
