@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class KakaoResponse(
     @SerializedName("documents")
-    val documents: List<Document>?,
+    val documents: List<DocumentResponse>?,
     @SerializedName("meta")
-    val meta: Meta?
+    val meta: MetaResponse?
 )
-data class Document(
+data class DocumentResponse(
     @SerializedName("collection")
     val collection: String?,
     @SerializedName("thumbnail_url")
@@ -28,7 +28,7 @@ data class Document(
     val datetime: String?,
 )
 
-data class Meta(
+data class MetaResponse(
     @SerializedName("is_end")
     val isEnd: Boolean?,
     @SerializedName("pageable_count")
