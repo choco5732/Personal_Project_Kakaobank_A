@@ -5,35 +5,35 @@ import com.google.gson.annotations.SerializedName
 
 data class KakaoResponse(
     @SerializedName("documents")
-    val documents: List<Document>,
+    val documents: List<Document>?,
     @SerializedName("meta")
-    val meta: Meta
+    val meta: Meta?
 )
 data class Document(
     @SerializedName("collection")
-    val collection: String,
+    val collection: String?,
     @SerializedName("thumbnail_url")
-    val thumbnailUrl: String,
+    val thumbnailUrl: String?,
     @SerializedName("image_url")
-    val imageUrl: String,
+    val imageUrl: String?,
     @SerializedName("width")
-    val width: Int,
+    val width: Int?,
     @SerializedName("height")
-    val height: Int,
+    val height: Int?,
     @SerializedName("display_sitename")
-    val displaySitename: String,
+    val displaySitename: String?,
     @SerializedName("doc_url")
-    val docUrl: String,
+    val docUrl: String?,
     @SerializedName("datetime")
-    val datetime: String,
+    val datetime: String?,
 )
 
 data class Meta(
     @SerializedName("is_end")
-    val isEnd: Boolean,
+    val isEnd: Boolean?,
     @SerializedName("pageable_count")
-    val pageableCount: Int,
+    val pageableCount: Int?,
     @SerializedName("total_count")
-    val totalCount: Int
+    val totalCount: Int?
 )
 

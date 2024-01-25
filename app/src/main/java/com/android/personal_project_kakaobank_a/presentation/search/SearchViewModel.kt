@@ -4,18 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.android.personal_project_kakaobank_a.data.model.KakaoModel
+import com.android.personal_project_kakaobank_a.data.model.Kakao
 import java.util.concurrent.atomic.AtomicLong
 
 class SearchViewModel(
     private val idGenerate: AtomicLong
 ) : ViewModel() {
 
-    private val _list: MutableLiveData<List<KakaoModel>> = MutableLiveData()
-    val list: LiveData<List<KakaoModel>> get() = _list
+    private val _list: MutableLiveData<List<Kakao>> = MutableLiveData()
+    val list: LiveData<List<Kakao>> get() = _list
 
 
-    fun addSearchItem(item: KakaoModel?) {
+    fun addSearchItem(item: Kakao?) {
         if (item == null) {
             return
         }
@@ -30,10 +30,10 @@ class SearchViewModel(
     }
 
     fun modifyKakaoItem(
-        item: KakaoModel?
+        item: Kakao?
     ) {
 
-        fun findIndex(item: KakaoModel?): Int {
+        fun findIndex(item: Kakao?): Int {
             val currentList = list.value.orEmpty().toMutableList()
             val findKakao = currentList.find {
                 it.id == item?.id

@@ -3,18 +3,18 @@ package com.android.personal_project_kakaobank_a.presentation.library
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.personal_project_kakaobank_a.data.model.KakaoModel
+import com.android.personal_project_kakaobank_a.data.model.Kakao
 import java.util.concurrent.atomic.AtomicLong
 
 class LibraryViewModel : ViewModel() {
 
-    private val _list: MutableLiveData<List<KakaoModel>> = MutableLiveData()
-    val list: LiveData<List<KakaoModel>> get() = _list
+    private val _list: MutableLiveData<List<Kakao>> = MutableLiveData()
+    val list: LiveData<List<Kakao>> get() = _list
 
     private val idGenerate = AtomicLong(1L)
 
 
-    fun updateLibraryItems(items: List<KakaoModel>) {
+    fun updateLibraryItems(items: List<Kakao>) {
         _list.value = items
     }
 

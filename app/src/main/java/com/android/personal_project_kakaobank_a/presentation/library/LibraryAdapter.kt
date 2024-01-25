@@ -6,25 +6,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.personal_project_kakaobank_a.data.model.KakaoModel
+import com.android.personal_project_kakaobank_a.data.model.Kakao
 import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
 import com.bumptech.glide.Glide
 
 class LibraryAdapter(
-    private val onItemClick: (Int, KakaoModel) -> Unit
-) : ListAdapter<KakaoModel, LibraryAdapter.ViewHolder>(
+    private val onItemClick: (Int, Kakao) -> Unit
+) : ListAdapter<Kakao, LibraryAdapter.ViewHolder>(
 
-    object : DiffUtil.ItemCallback<KakaoModel>() {
+    object : DiffUtil.ItemCallback<Kakao>() {
         override fun areItemsTheSame(
-            oldItem: KakaoModel,
-            newItem: KakaoModel
+            oldItem: Kakao,
+            newItem: Kakao
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: KakaoModel,
-            newItem: KakaoModel
+            oldItem: Kakao,
+            newItem: Kakao
         ): Boolean {
             return oldItem == newItem
         }
@@ -45,10 +45,10 @@ class LibraryAdapter(
 
     class ViewHolder(
         private val binding: LibraryItemBinding,
-        private val onItemClick: (Int, KakaoModel) -> Unit
+        private val onItemClick: (Int, Kakao) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: KakaoModel) = with(binding) {
+        fun bind(item: Kakao) = with(binding) {
 
             Glide.with(root)
                 .load(item.thumbnail_url)
