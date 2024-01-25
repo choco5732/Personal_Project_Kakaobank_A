@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.personal_project_kakaobank_a.MainSharedEventForSearch
 import com.android.personal_project_kakaobank_a.MainSharedViewModel
-import com.android.personal_project_kakaobank_a.data.model.Kakao
 import com.android.personal_project_kakaobank_a.databinding.SearchFragmentBinding
 import com.android.personal_project_kakaobank_a.retrofit.RetrofitClient
 import kotlinx.coroutines.launch

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.personal_project_kakaobank_a.data.model.Kakao
+import com.android.personal_project_kakaobank_a.presentation.search.Kakao
 import com.android.personal_project_kakaobank_a.databinding.LibraryItemBinding
 import com.bumptech.glide.Glide
 

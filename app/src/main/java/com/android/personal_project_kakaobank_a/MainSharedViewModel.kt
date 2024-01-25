@@ -3,7 +3,7 @@ package com.android.personal_project_kakaobank_a
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.personal_project_kakaobank_a.data.model.Kakao
+import com.android.personal_project_kakaobank_a.presentation.search.Kakao
 
 class MainSharedViewModel : ViewModel() {
 

@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.android.personal_project_kakaobank_a.presentation.library.LibraryFragment
 import com.android.personal_project_kakaobank_a.presentation.search.SearchFragment
-import com.android.personal_project_kakaobank_a.data.model.Tab
 
 class ViewPagerAdapter(
     fragmentActivity: FragmentActivity

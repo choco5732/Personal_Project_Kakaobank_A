@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.android.personal_project_kakaobank_a.data.model.Kakao
 import java.util.concurrent.atomic.AtomicLong
 
 class SearchViewModel(

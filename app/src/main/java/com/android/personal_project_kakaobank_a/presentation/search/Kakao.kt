@@ -1,4 +1,4 @@
-package com.android.personal_project_kakaobank_a.data.model
+package com.android.personal_project_kakaobank_a.presentation.search
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

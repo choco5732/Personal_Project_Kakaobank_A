@@ -1,4 +1,4 @@
-package com.android.personal_project_kakaobank_a.data.model
+package com.android.personal_project_kakaobank_a.presentation.main
 
 import androidx.fragment.app.Fragment
 
