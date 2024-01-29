@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.android.personal_project_kakaobank_a"
+    namespace = "com.android.personal_project_retrofit"
     compileSdk = 33
 
     buildFeatures {
@@ -16,7 +16,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.android.personal_project_kakaobank_a"
+        applicationId = "com.android.personal_project_retrofit"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
