@@ -67,13 +67,8 @@ class SearchFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
-
-        /**
-         * 리사이클러뷰 어댑터, 레이아웃매니저 설정
-         */
         recyclerView.adapter = recyclerViewAdpater
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-
 
         // SharedPreferences -> 마지막 검색어 호출
         loadData()
@@ -88,6 +83,8 @@ class SearchFragment : Fragment() {
             val query = etSearchKeyword.text.toString()
             Log.d("SearchFragment", "#choco5732 query : $query")
             communicateNetWork(setUpKakaoParameter(query))
+
+            viewModel.search(query)
 
             // SharedPreferences -> 검색어 저장
             saveData()
@@ -149,7 +146,7 @@ class SearchFragment : Fragment() {
      * 서버로부터 데이터를 받아오는 로직
      */
     private fun communicateNetWork(param: HashMap<String, String>) = lifecycleScope.launch() {
-        val responseData = RetrofitClient.search.getKakao(param = param)
+        val responseData = RetrofitClient.search.getSearchImage(param = param)
 
         val item = responseData.documents
 

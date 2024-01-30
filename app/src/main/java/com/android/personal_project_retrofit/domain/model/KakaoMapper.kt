@@ -4,6 +4,7 @@ import com.android.personal_project_retrofit.data.model.DocumentResponse
 import com.android.personal_project_retrofit.data.model.KakaoResponse
 import com.android.personal_project_retrofit.data.model.MetaResponse
 
+// kotlin extention
 fun KakaoResponse.toKakaoEntity() = KakaoEntity(
     documents = documents?.map{
         it.toEntity()

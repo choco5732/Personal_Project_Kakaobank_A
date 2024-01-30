@@ -2,13 +2,13 @@ package com.android.personal_project_retrofit.data.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class KakaoResponse(
     @SerializedName("documents")
     val documents: List<DocumentResponse>?,
     @SerializedName("meta")
     val meta: MetaResponse?
 )
+
 data class DocumentResponse(
     @SerializedName("collection")
     val collection: String?,
