@@ -38,13 +38,27 @@ class SearchViewModel(
 
     fun search(query: String) {
         viewModelScope.launch {
-            val list = searchImage(
-                query = query,
-                page = 80,
-                sort = "accuracy",
-                size = 1
-            )
-            Log.d("choco5732", list.toString())
+            runCatching {
+                val image = searchImage(query)
+                val currentList = list.value.orEmpty().toMutableList()
+
+                    val list = image.documents?.map {
+                        Kakao(
+                            id = idGenerate.getAndIncrement(),
+                            thumbnail_url = it.thumbnailUrl,
+                            displaySiteName = it.displaySitename,
+                            dateTime = it.datetime,
+                            isAdd = false
+                        )
+                    }.orEmpty()
+
+                currentList.addAll(list)
+                _list.value = currentList
+
+            }.onFailure {
+                // network error
+                Log.e("choco5732", it.message.toString())
+            }
         }
     }
 
@@ -81,22 +95,3 @@ class SearchViewModel(
     }
 }
 
-class SearchViewModelFactory : ViewModelProvider.Factory {
-
-    // id 를 부여할 값
-    private val idGenerate = AtomicLong(1L)
-    private val repository: SearchRepository = SearchRepositoryImpl(
-        RetrofitClient.search
-    )
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
-            return SearchViewModel(
-                idGenerate,
-                GetSearchImageUseCase(repository)
-            ) as T
-        } else {
-            throw IllegalArgumentException("Not found ViewModel class.")
-        }
-    }
-}

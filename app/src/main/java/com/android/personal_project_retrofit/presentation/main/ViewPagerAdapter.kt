@@ -10,14 +10,14 @@ class ViewPagerAdapter(
     fragmentActivity: FragmentActivity
 ) : FragmentStateAdapter(fragmentActivity) {
 
-    private val fragments = ArrayList<Tab>()
+    private val fragments = ArrayList<MainTabs>()
 
     init {
         fragments.add(
-            Tab(SearchFragment.newInstance(),"Search")
+            MainTabs(SearchFragment.newInstance(),"Search")
         )
         fragments.add(
-            Tab(LibraryFragment.newInstance(),"Library")
+            MainTabs(LibraryFragment.newInstance(),"Library")
         )
     }
     override fun getItemCount(): Int {

@@ -9,10 +9,7 @@ class SearchRepositoryImpl(
     private val remoteDataSource: SearchRemoteDataSource
 ): SearchRepository {
     override suspend fun getSearchImage(
-        query: String,
-        sort: String,
-        page: Int,
-        size: Int
+        query: String
     ): KakaoEntity =
         remoteDataSource.getSearchImage(
             hashMapOf(

@@ -17,7 +17,6 @@ class LibraryFragment : Fragment() {
         fun newInstance() = LibraryFragment()
     }
 
-
     private var _binding: LibraryFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -42,38 +41,33 @@ class LibraryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        initViewModel()
+    }
+
+    private fun initView() = with(binding) {
+
+        recyclerView.adapter = recyclerViewAdapter
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+    }
+
+    private fun initViewModel() = with(viewModel) {
+
+        list.observe(viewLifecycleOwner) {
+            recyclerViewAdapter.submitList(it)
+        }
+
+        sharedViewModel.libraryEvent.observe(viewLifecycleOwner) { event ->
+            when(event) {
+                is MainSharedEventForLibrary.UpdateLibraryItems -> {
+                    viewModel.updateLibraryItems(event.items)
+                }
+                else -> Unit
+            }
+        }
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
     }
-
-    private fun initView() = with(binding) {
-
-        /**
-         *  리사이클러뷰 어댑터, 레이아웃매니저 설정
-         */
-        recyclerView.adapter = recyclerViewAdapter
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-
-        with(viewModel) {
-            list.observe(viewLifecycleOwner) {
-                recyclerViewAdapter.submitList(it)
-            }
-        }
-
-        with(sharedViewModel) {
-            libraryEvent.observe(viewLifecycleOwner) { event ->
-                when (event) {
-                    is MainSharedEventForLibrary.UpdateLibraryItems -> {
-                        viewModel.updateLibraryItems(event.items)
-                    }
-                    else -> Unit
-                }
-            }
-        }
-
-    }
-
 }

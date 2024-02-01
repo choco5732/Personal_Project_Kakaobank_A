@@ -6,14 +6,8 @@ class GetSearchImageUseCase(
     private val repository: SearchRepository
 ) {
     suspend operator fun invoke(
-        query: String,
-        sort: String,
-        page: Int,
-        size: Int
+        query: String
     ) = repository.getSearchImage(
-        query,
-        sort,
-        page,
-        size
+        query
     )
 }
