@@ -50,11 +50,19 @@ class SearchFragment : Fragment() {
 
         initView()
         initViewModel()
+
     }
 
     private fun initView() = with(binding) {
         recyclerView.adapter = searchAdapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        recyclerView?.run {
+            val spanCount = 2
+            val space = 20 //20dp로 간격 지정
+            addItemDecoration(GridSpaceItemDecoration(spanCount, space))
+        }
+
 
         loadData() // SharedPreferences -> 마지막 검색어 호출
 
