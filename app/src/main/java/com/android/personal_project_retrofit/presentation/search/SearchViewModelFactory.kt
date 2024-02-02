@@ -20,7 +20,8 @@ class SearchViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
             return SearchViewModel(
                 idGenerate,
-                GetSearchImageUseCase(repository)
+                GetSearchImageUseCase(repository),
+                repository
             ) as T
         } else {
             throw IllegalArgumentException("Not found ViewModel class.")

@@ -24,7 +24,7 @@ class SearchFragment : Fragment() {
     private val searchAdapter by lazy {
         SearchAdapter(
             onItemClick = { _, item ->
-                viewModel.modifyKakaoItem(item = item)
+                viewModel.modifyKakaoItem(item = item, list = viewModel.list)
             }
         )
     }
@@ -84,7 +84,7 @@ class SearchFragment : Fragment() {
         sharedViewModel.searchEvent.observe(viewLifecycleOwner) { event ->
             when (event) {
                 is MainSharedEventForSearch.UpdateSearchItem -> {
-                    viewModel.modifyKakaoItem(event.item)
+                    viewModel.modifyKakaoItem(event.item, viewModel.list)
                     searchAdapter.notifyDataSetChanged()
                 }
             }

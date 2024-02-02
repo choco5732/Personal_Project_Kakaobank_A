@@ -18,7 +18,8 @@ import java.util.concurrent.atomic.AtomicLong
 
 class SearchViewModel(
     private val idGenerate: AtomicLong,
-    private val searchImage: GetSearchImageUseCase
+    private val searchImage: GetSearchImageUseCase,
+    private val repository: SearchRepository
 ) : ViewModel() {
 
     private val _list: MutableLiveData<List<Kakao>> = MutableLiveData()
@@ -54,35 +55,14 @@ class SearchViewModel(
     }
 
     fun modifyKakaoItem(
-        item: Kakao?
+        item: Kakao?,
+        list: LiveData<List<Kakao>>
     ) {
-
-        fun findIndex(item: Kakao?): Int {
-            val currentList = list.value.orEmpty().toMutableList()
-            val findKakao = currentList.find {
-                it.id == item?.id
-            }
-            return currentList.indexOf(findKakao)
-        }
-
-        if (item == null) {
-            return
-        }
-
-        val findPostion = findIndex(item)
-        if (findPostion < 0) {
-            return
-        }
-
-        val currentList = list.value.orEmpty().toMutableList()
-        currentList[findPostion] = item
-        _list.value = currentList
+        _list.value = repository.modifyKakaoItem(item, list)
     }
 
     fun removeKakaoItems() {
-        val currentList = list.value.orEmpty().toMutableList()
-        currentList.clear()
-        _list.value = currentList
+        _list.value = repository.removeKakaoItems()
     }
 
     fun loadData(
