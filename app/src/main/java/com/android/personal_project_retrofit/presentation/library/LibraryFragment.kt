@@ -17,6 +17,7 @@ class LibraryFragment : Fragment() {
         fun newInstance() = LibraryFragment()
     }
 
+
     private var _binding: LibraryFragmentBinding? = null
     private val binding get() = _binding!!
 

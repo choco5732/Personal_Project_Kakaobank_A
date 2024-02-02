@@ -24,9 +24,7 @@ class SearchFragment : Fragment() {
     private val searchAdapter by lazy {
         SearchAdapter(
             onItemClick = { _, item ->
-                viewModel.modifyKakaoItem(
-                    item = item
-                )
+                viewModel.modifyKakaoItem(item = item)
             }
         )
     }
@@ -63,16 +61,17 @@ class SearchFragment : Fragment() {
             addItemDecoration(GridSpaceItemDecoration(spanCount, space))
         }
 
-
-        loadData() // SharedPreferences -> 마지막 검색어 호출
+        // SharedPreferences -> 마지막 검색어 호출
+        viewModel.loadData("preference", "searchKeyword")
 
         btnSearch.setOnClickListener {
             viewModel.removeKakaoItems()
 
             val query = etSearchKeyword.text.toString()
-
             viewModel.search(query)
-            saveData() // SharedPreferences -> 검색어 저장
+
+            // SharedPreferences -> 검색어 저장
+            viewModel.saveData("preference", "searchKeyword")
         }
     }
 
@@ -90,24 +89,21 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-    }
+        event.observe(viewLifecycleOwner) { event ->
+            when(event) {
+                is SearchEvent.LoadData -> {
+                    val preference = this@SearchFragment.activity?.getSharedPreferences(event.type, 0)
+                    binding.etSearchKeyword.setText(preference?.getString(event.name, ""))
+                }
 
-    /**
-     * SharedPreferences -> 검색어 불러오기
-     */
-    private fun loadData() {
-        val preference = this.activity?.getSharedPreferences("preference", 0)
-        binding.etSearchKeyword.setText(preference?.getString("searchKeyword", ""))
-    }
-
-    /**
-     * SharedPreferences -> 검색어 저장
-     */
-    private fun saveData() {
-        val preference = this.activity?.getSharedPreferences("preference", 0)
-        val edit = preference?.edit()
-        edit?.putString("searchKeyword", binding.etSearchKeyword.text.toString())
-        edit?.apply()
+                is SearchEvent.SaveData -> {
+                    val preference = this@SearchFragment.activity?.getSharedPreferences(event.type, 0)
+                    val edit = preference?.edit()
+                    edit?.putString(event.name, binding.etSearchKeyword.text.toString())
+                    edit?.apply()
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
