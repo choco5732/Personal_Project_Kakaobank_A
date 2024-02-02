@@ -21,21 +21,6 @@ class SearchViewModel(
     private val _list: MutableLiveData<List<Kakao>> = MutableLiveData()
     val list: LiveData<List<Kakao>> get() = _list
 
-
-    fun addSearchItem(item: Kakao?) {
-        if (item == null) {
-            return
-        }
-        val currentList = list.value.orEmpty().toMutableList()
-
-        currentList.add(
-            item.copy(
-                id = idGenerate.getAndIncrement()
-            )
-        )
-        _list.value = currentList
-    }
-
     fun search(query: String) {
         viewModelScope.launch {
             runCatching {
