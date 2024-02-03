@@ -17,7 +17,8 @@
 <H1> 🎄 Architecture</H1>
 - CleanArchitecture, MVVM을 완벽히 구현했습니다.
 - Data, Domain, Presentation으로 패키지를 나누어 개발했습니다.
-![image](https://github.com/choco5732/Searcher/assets/81561579/de15e16d-b2e6-4579-b6a3-28ba643d8eff)
+![image](https://github.com/choco5732/Searcher/assets/81561579/f0490371-6417-4990-b254-bfb2c16b3f92)
+
 
 - 모든 비즈니스 로직은 viewmodel로 처리했습니다. 
   ex) usecase와 entity, repository를 만들어 retrofit 통
