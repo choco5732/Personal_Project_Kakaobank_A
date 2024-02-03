@@ -12,6 +12,8 @@ class MainSharedViewModel : ViewModel() {
 
     private val _searchEvent: MutableLiveData<MainSharedEventForSearch> = MutableLiveData()
     val searchEvent: LiveData<MainSharedEventForSearch> get() = _searchEvent
+
+
     fun updateLibraryItems(items: List<Kakao>?) {
         items?.filter {
             it.isAdd

@@ -1,11 +1,11 @@
 package com.android.personal_project_retrofit.presentation.search
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,6 +25,7 @@ class SearchFragment : Fragment() {
         SearchAdapter(
             onItemClick = { _, item ->
                 viewModel.modifyKakaoItem(item = item, list = viewModel.list)
+                viewModel.searchToast("보관함에 등록되었습니다.")
             }
         )
     }
@@ -101,6 +102,10 @@ class SearchFragment : Fragment() {
                     val edit = preference?.edit()
                     edit?.putString(event.name, binding.etSearchKeyword.text.toString())
                     edit?.apply()
+                }
+
+                is SearchEvent.AddToast -> {
+                    Toast.makeText(requireContext(),event.text,Toast.LENGTH_SHORT).show()
                 }
             }
         }

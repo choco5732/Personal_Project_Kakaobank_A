@@ -1,6 +1,7 @@
 package com.android.personal_project_retrofit.retrofit
 
 import com.android.personal_project_retrofit.data.remote.SearchRemoteDataSource
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

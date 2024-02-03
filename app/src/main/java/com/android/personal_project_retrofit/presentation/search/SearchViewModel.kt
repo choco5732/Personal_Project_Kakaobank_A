@@ -1,17 +1,12 @@
 package com.android.personal_project_retrofit.presentation.search
 
-import android.content.SharedPreferences
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.android.personal_project_retrofit.data.repository.SearchRepositoryImpl
 import com.android.personal_project_retrofit.domain.repository.SearchRepository
 import com.android.personal_project_retrofit.domain.usecase.GetSearchImageUseCase
-import com.android.personal_project_retrofit.retrofit.RetrofitClient
 import com.android.personal_project_retrofit.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.concurrent.atomic.AtomicLong
@@ -39,7 +34,7 @@ class SearchViewModel(
                             id = idGenerate.getAndIncrement(),
                             thumbnail_url = it.thumbnailUrl,
                             displaySiteName = it.displaySitename,
-                            dateTime = it.datetime,
+                            dateTime = it.datetime?.substring(0 until 10),
                             isAdd = false
                         )
                     }.orEmpty()
@@ -82,6 +77,14 @@ class SearchViewModel(
         _event.value = SearchEvent.SaveData(
             type,
             name
+        )
+    }
+
+    fun searchToast(
+        text: String
+    ) {
+        _event.value = SearchEvent.AddToast(
+            text
         )
     }
 
