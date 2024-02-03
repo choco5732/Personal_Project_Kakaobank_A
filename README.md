@@ -18,4 +18,5 @@
 - `MVVM` `CleanArchitecture`
 
 # 작동 영상
-![Screen_recording_20240204_072326](https://github.com/choco5732/Searcher/assets/81561579/55434810-a0af-4b4a-b237-d60ba7779298)
+![Screen_recording_20240204_072326 (1)](https://github.com/choco5732/Searcher/assets/81561579/0dea41ce-5d3b-4aec-92f0-298946cfa19a)
+
