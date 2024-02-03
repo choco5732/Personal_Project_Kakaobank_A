@@ -59,12 +59,6 @@ class SearchAdapter(
 
             icCheck.isVisible = item.isAdd == true
 
-//            if (item.isAdd) {
-//                icCheck.isVisible = true
-//            } else {
-//                icCheck.isVisible = false
-//            }
-
             container.setOnClickListener {
                 item.isAdd = !item.isAdd
                 Log.d("SearchAdapter", "#choco5732 눌렀을시 isAdd 테스트 : ${item.isAdd}")
