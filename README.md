@@ -1,12 +1,23 @@
 <H1>📽️ 프로젝트</H1>
-**Searcher**앱은 카카오API를 이용해 이미지를 검색하는 앱입니다. 
-Viewmodel을 이용해 View에서는 오로지 UI만 처리할 수 있게 개발해 MVVM을 완벽히 구현했습니다.
-CleanArchitecture를 준수해 data, domain, presentation으로 나누어 개발을 진행했습니다.
+<b>Searcher</b>앱은 Retrofit과 카카오API를 이용해 이미지를 검색하는 앱입니다.<br> 
+SharedPreference를 이용해 마지막 검색어를 검색창에 띄워주었으며, 
+Viewmodel을 이용해 View에서는 오로지 UI를 보여주는 코드로 구성했고, UI처리나 비즈니스 로직은 ViewModel로 처리해 MVVM을 구현했습니다.<br> 
+또한 data, domain, presentation 프로젝트를 나누어 CleanArchitecture를 구현했습니다.
+
+
       
+<H1>🎯 기술 스택</H1>
 
+|제목|내용|
+|------|---|
+|Language|Kotlin|
+|jetpack|AAC ViewModel, LiveData, ViewBinding|
+|network|OkHttp3, Retrofit2, Coroutine|
+|data|SharedPreference|
+|ImageLoading|Glide|
 
-
-# 특이사항
+<H1> 🎄 Architecture</H1>
+- `MVVM` `CleanArchitecture`
 
 1. 키 값을 local.properties에 숨겨뒀습니다.
    Secrets Gradle 플러그인 사용 -> (https://developers.google.com/maps/documentation/android-sdk/secrets-gradle-plugin?hl=ko)
