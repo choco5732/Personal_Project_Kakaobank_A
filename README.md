@@ -19,3 +19,4 @@
 
 # 작동 영상
 
+            ![Screen_recording_20240204_072326](https://github.com/choco5732/Searcher/assets/81561579/7f046c7e-31c5-4688-9a4a-6b6289ed287f)
