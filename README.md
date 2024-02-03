@@ -12,12 +12,12 @@
 |ImageLoading|Glide|
 
 <H1> 🎄 Architecture</H1>
-- CleanArchitecture, MVVM을 100% 구현했습니다. <br><br>
-- Data, Domain, Presentation으로 패키지를 나누어 개발했습니다.<br><br>
-- 모든 비즈니스 로직은 viewmodel로 처리했습니다. <br><br>
-  ex) presentation(viewModel) -> domain(usecase) -> data(repository) <br><br>
-- 간단한 Toast 메시지 출력조차 ViewModel을 이용해 처리했습니다.<br>
-    View에서는 오로지 ViewModel로부터 받는 데이터로 뷰만 담당하게 구성했습니다.
+- <b>CleanArchitecture, MVVM</b>을 100% 구현했습니다. <br><br>
+- <b>Data, Domain, Presentation</b>으로 패키지를 나누어 개발했습니다.<br><br>
+- 모든 비즈니스 로직은 <b>Viewmodel과 LiveData</b>로 처리했습니다. <br><br>
+  ex) <b>presentation(viewModel) -> domain(usecase) -> data(repository</b>) <br><br>
+- 간단한 Toast 메시지 출력조차 <b>ViewModel을</b>을 이용해 처리했습니다.<br>
+    View에서는 단순히 Viewmodel로 부터 받는 데이터를 받아 수동적으로 뷰만 처리하게 구성했습니다.
 
 # 🎯 작동 영상
 ![Screen_recording_20240204_072326 (1)](https://github.com/choco5732/Searcher/assets/81561579/0dea41ce-5d3b-4aec-92f0-298946cfa19a)
