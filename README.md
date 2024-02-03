@@ -26,9 +26,9 @@
 ![Screen_recording_20240204_072326 (1)](https://github.com/choco5732/Searcher/assets/81561579/0dea41ce-5d3b-4aec-92f0-298946cfa19a)
 
 <H1> 💡 배운 점</H1>
-- Retrofit2와 Okhttp3를 통해 안드로이드에서 HTTP통신을 구현해볼 수 있었습니다.
-- MVVM을 패턴을 도입해, 기존의 MVC 아키텍처의 문제점을 개선시켜 볼 수 있었습니다.
-- 단순 몇가지 기능만 ViewModel로 구현하는게 아닌 CleanArchitecture를 기반으로 단순 UI처리부터 모든 비즈니스 로직을 ViewModel로 처리해 MVVM을 완벽히 구현해볼 수 있었습니다.
+- <b></b>Retrofit2</b>와 <b>Okhttp3</b>를 통해 안드로이드에서 HTTP통신을 구현해볼 수 있었습니다.<br>
+- <b>MVVM</b>을 패턴을 도입해, 기존의 <b>MVC</b> 아키텍처의 문제점을 개선시켜 볼 수 있었습니다.<br>
+- <b>CleanArchitecture</b>를 기반으로 단순 UI처리부터 모든 비즈니스 로직을 <b>ViewModel</b>로 처리해 <b>MVVM</b>을 완벽히 구현해볼 수 있었습니다.
 
 
 
