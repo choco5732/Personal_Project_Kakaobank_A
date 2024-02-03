@@ -17,13 +17,13 @@
 - 모든 비즈니스 로직은 <b>Viewmodel과 LiveData</b>로 처리했습니다. <br><br>
   ex) <b>presentation(viewModel) -> domain(usecase) -> data(repository</b>) <br><br>
 - 간단한 Toast 메시지 출력조차 <b>ViewModel을</b>을 이용해 처리했습니다.<br>
-    View에서는 단순히 Viewmodel로 부터 받는 데이터를 받아 수동적으로 뷰만 처리하게 구성했습니다.
+    View에서는 단순히 <b>Viewmodel</b>로 부터 받는 데이터를 받아 수동적으로 뷰만 처리하게 구성했습니다.
 
 # 🎯 작동 영상
 ![Screen_recording_20240204_072326 (1)](https://github.com/choco5732/Searcher/assets/81561579/0dea41ce-5d3b-4aec-92f0-298946cfa19a)
 
 <H1> 💡 배운 점</H1>
-- <b></b>Retrofit2</b>와 <b>Okhttp3</b>를 통해 안드로이드에서 HTTP통신을 구현해 볼 수 있었습니다.<br><br>
+- <b>Retrofit2</b>와 <b>Okhttp3</b>를 통해 안드로이드에서 HTTP통신을 구현해 볼 수 있었습니다.<br><br>
 - <b>MVVM</b>을 패턴을 도입해, 기존의 <b>MVC</b> 아키텍처의 문제점을 개선시켜 볼 수 있었습니다.<br><br>
 - <b>CleanArchitecture</b>를 기반으로 단순 UI처리부터 모든 비즈니스 로직을 <b>ViewModel</b>로 처리해 <b>MVVM</b>을 완벽히 구현해 볼 수 있었습니다.
 
