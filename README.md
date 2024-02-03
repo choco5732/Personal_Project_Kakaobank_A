@@ -1,5 +1,5 @@
 <H1>📽️ 프로젝트</H1>
-<b>Searcher</b>**앱은 Retrofit과 카카오API를 이용한 이미지 검색 앱입니다**.<br> 
+<b>Searcher앱은 Retrofit과 카카오API를 이용한 이미지 검색 앱 입니다</b>
 
 
 
