@@ -4,7 +4,7 @@
 
 
       
-<H1>🎯기술 스택</H1>
+<H1>🎯 기술 스택</H1>
 
 |제목|내용|
 |------|---|
@@ -15,9 +15,16 @@
 |ImageLoading|Glide|
 
 <H1> 🎄 Architecture</H1>
-- `MVVM` `CleanArchitecture`
+- CleanArchitecture, MVVM을 완벽히 구현했습니다.
+- Data, Domain, Presentation으로 패키지를 나누어 개발했습니다.
+![image](https://github.com/choco5732/Searcher/assets/81561579/de15e16d-b2e6-4579-b6a3-28ba643d8eff)
 
-# 🎯작동 영상
+- 모든 비즈니스 로직은 viewmodel로 처리했습니다. 
+  ex) usecase와 entity, repository를 만들어 retrofit 통
+- 간단한 Toast 메시지 출력조차 ViewModel을 이용해 처리했습니다.
+  View에서는 오로지 ViewModel로부터 받는 데이터를 가지고 뷰 코드로만 구성했습니다.
+
+# 🎯 작동 영상
 ![Screen_recording_20240204_072326 (1)](https://github.com/choco5732/Searcher/assets/81561579/0dea41ce-5d3b-4aec-92f0-298946cfa19a)
 
 
