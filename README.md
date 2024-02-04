@@ -1,5 +1,10 @@
 <H1>📽️ 프로젝트</H1>
-<b>Searcher앱은 Retrofit과 카카오API를 이용한 이미지 검색 앱 입니다</b>
+<b>Searcher 앱은 Retrofit과 카카오API를 이용한 이미지 검색 앱 입니다</b>
+
+<H1>🔬 주요 기능 </H1>
+- 이미지 검색 <br><br>
+- 이미지 북마크에 저장<br><br>
+- sharedPreference를 이용한 마지막 검색어 저장
 
 <H1>🎯 기술 스택</H1>
 
