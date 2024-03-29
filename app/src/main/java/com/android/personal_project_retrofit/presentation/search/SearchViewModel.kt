@@ -45,6 +45,8 @@ class SearchViewModel(
             }.onFailure {
                 // network error
                 Log.e("choco5732", it.message.toString())
+                _event.value = SearchEvent.AddToast("네트워크 연결문제 발생!")
+//                _event.value = SearchEvent.AddToast(it.message.toString())
             }
         }
     }

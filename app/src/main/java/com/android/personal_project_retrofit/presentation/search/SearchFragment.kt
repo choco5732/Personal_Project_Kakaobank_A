@@ -91,7 +91,7 @@ class SearchFragment : Fragment() {
             }
         }
         event.observe(viewLifecycleOwner) { event ->
-            when(event) {
+            when (event) {
                 is SearchEvent.LoadData -> {
                     val preference = this@SearchFragment.activity?.getSharedPreferences(event.type, 0)
                     binding.etSearchKeyword.setText(preference?.getString(event.name, ""))
