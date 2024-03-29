@@ -9,7 +9,7 @@ class AuthorizationInterceptor: Interceptor {
         val newRequest = chain.request().newBuilder()
             .addHeader(
                 "Authorization",
-                BuildConfig.REST_API_KEY
+                "KakaoAK 8e566920812d0d734b7610e985e603ef"
             ).build()
         return chain.proceed(newRequest)
     }
